@@ -1,0 +1,523 @@
+[
+  {
+    "customerName": "sangita agarwala",
+    "phone": "9531181700",
+    "email": "agarwals99990@gmail.com",
+    "address": "Shivoham boys hostel Instrumentation Limited Colony",
+    "city": "Kota",
+    "state": "Rajasthan",
+    "pincode": "324005",
+    "items": [
+      {
+        "id": "resorb-sp-44",
+        "sku": "RESORB-SP-44",
+        "name": "RESORB SP 44",
+        "title": "Compatible Remote for Sony Home Theatre System (DAV / HBD Series)",
+        "category": "speaker-remotes",
+        "brand": "sony",
+        "price": 279,
+        "originalPrice": 499,
+        "discount": 44,
+        "rating": 4.3,
+        "reviewCount": 156,
+        "remoteType": "IR",
+        "voiceEnabled": false,
+        "batteryType": "2× AAA",
+        "batteryIncluded": true,
+        "plugAndPlay": true,
+        "image": "https://res.cloudinary.com/resorb/image/upload/v1/products/sp-44-front.jpg",
+        "images": [
+          "https://res.cloudinary.com/resorb/image/upload/v1/products/sp-44-front.jpg"
+        ],
+        "description": "Replacement remote for Sony DAV and HBD home theatre systems. All functions including surround mode, DVD navigation, and radio. Plug and play.",
+        "features": [
+          "Surround mode",
+          "DVD navigation",
+          "Radio control",
+          "Batteries included"
+        ],
+        "compatibleBrands": [
+          "Sony"
+        ],
+        "compatibleModels": [
+          "Sony DAV-TZ140",
+          "Sony DAV-TZ145",
+          "Sony HBD-TZ130",
+          "Sony DAV-DZ350",
+          "Sony HBD-E190",
+          "Sony DAV-TZ715DB"
+        ],
+        "warranty": "30 days replacement",
+        "inStock": true,
+        "popular": true,
+        "tags": [
+          "sony home theatre remote",
+          "sony dav remote",
+          "sony hbd remote",
+          "home theatre remote"
+        ],
+        "quantity": 1
+      }
+    ],
+    "subtotal": 279,
+    "shipping": 60,
+    "total": 339,
+    "id": "RES835262",
+    "status": "PICKED_UP",
+    "createdAt": "2026-05-29T14:13:28.491Z",
+    "shipmentId": "SHIP809582",
+    "trackingId": "TRK51366233",
+    "courier": "DTDC",
+    "updatedAt": "2026-05-29T14:15:12.756Z"
+  },
+  {
+    "customerName": "Prashan Agarwala",
+    "phone": "9864548325",
+    "email": "ronikagarwal1404@gmail.com",
+    "address": "srm\nPotheri, SRM Nagar",
+    "city": "Kattankulathur",
+    "state": "Tamil Nadu",
+    "pincode": "603203",
+    "items": [
+      {
+        "id": "resorb-stb-90",
+        "sku": "RESORB-STB-90",
+        "name": "RESORB STB 90",
+        "title": "Compatible Remote for Dish TV Set-Top Box (NXT / Smart+ HD)",
+        "category": "set-top-box-remotes",
+        "brand": "dishtv",
+        "price": 179,
+        "originalPrice": 299,
+        "discount": 40,
+        "rating": 4.2,
+        "reviewCount": 198,
+        "remoteType": "IR",
+        "voiceEnabled": false,
+        "batteryType": "2× AAA",
+        "batteryIncluded": true,
+        "plugAndPlay": true,
+        "image": "https://res.cloudinary.com/resorb/image/upload/v1/products/stb-90-front.jpg",
+        "images": [
+          "https://res.cloudinary.com/resorb/image/upload/v1/products/stb-90-front.jpg"
+        ],
+        "description": "Replacement remote for Dish TV set-top boxes. Compatible with NXT and Smart+ HD models. All standard functions operational.",
+        "features": [
+          "All functions",
+          "Plug & Play",
+          "Batteries included"
+        ],
+        "compatibleBrands": [
+          "Dish TV"
+        ],
+        "compatibleModels": [
+          "Dish TV NXT HD",
+          "Dish TV Smart HD",
+          "Dish TV Smart+ HD",
+          "Dish TV SD Box",
+          "Dish TV HD Box"
+        ],
+        "warranty": "30 days replacement",
+        "inStock": true,
+        "popular": false,
+        "tags": [
+          "dish tv remote",
+          "dishtv remote",
+          "dish tv hd remote"
+        ],
+        "quantity": 1
+      }
+    ],
+    "subtotal": 179,
+    "shipping": 60,
+    "total": 239,
+    "id": "RES572127",
+    "status": "PICKED_UP",
+    "createdAt": "2026-05-29T14:11:29.973Z",
+    "shipmentId": "SHIP139376",
+    "trackingId": "TRK45314563",
+    "courier": "Ekart",
+    "updatedAt": "2026-05-29T14:16:43.531Z"
+  },
+  {
+    "customerName": "Prashan Agarwala",
+    "phone": "9864548325",
+    "email": "ronikagarwal1404@gmail.com",
+    "address": "srm\nPotheri, SRM Nagar",
+    "city": "Kattankulathur",
+    "state": "Tamil Nadu",
+    "pincode": "603203",
+    "items": [
+      {
+        "id": "resorb-led-810",
+        "sku": "RESORB-LED-810",
+        "name": "RESORB LED 810",
+        "title": "Compatible Remote for LG Smart TV (Magic Remote Alternative, IR)",
+        "category": "tv-remotes",
+        "brand": "lg",
+        "price": 279,
+        "originalPrice": 499,
+        "discount": 44,
+        "rating": 4.2,
+        "reviewCount": 218,
+        "remoteType": "IR",
+        "voiceEnabled": false,
+        "batteryType": "2× AAA",
+        "batteryIncluded": true,
+        "plugAndPlay": true,
+        "image": "https://res.cloudinary.com/resorb/image/upload/v1/products/led-810-front.jpg",
+        "images": [
+          "https://res.cloudinary.com/resorb/image/upload/v1/products/led-810-front.jpg",
+          "https://res.cloudinary.com/resorb/image/upload/v1/products/led-810-back.jpg"
+        ],
+        "description": "Standard IR replacement remote for LG Smart TVs. Works as a non-cursor alternative to the LG Magic Remote. All basic and smart functions supported including webOS navigation.",
+        "features": [
+          "webOS navigation support",
+          "No pairing needed",
+          "Plug & Play",
+          "Batteries included"
+        ],
+        "compatibleBrands": [
+          "LG"
+        ],
+        "compatibleModels": [
+          "LG 32LM563BPTC",
+          "LG 43UP7500PTZ",
+          "LG 50UP7500PTZ",
+          "LG 55UP7500PTZ",
+          "LG 65UP8000PTZ",
+          "LG OLED48A2PSA",
+          "LG OLED55C2PSA",
+          "LG OLED65C2PSA",
+          "LG NanoCell 55NANO75SQA",
+          "LG 43UR7500PSC"
+        ],
+        "warranty": "30 days replacement",
+        "inStock": true,
+        "popular": true,
+        "tags": [
+          "lg tv remote",
+          "lg smart tv remote",
+          "webos remote",
+          "lg led remote",
+          "magic remote alternative"
+        ],
+        "quantity": 1
+      }
+    ],
+    "subtotal": 279,
+    "shipping": 60,
+    "total": 339,
+    "id": "RES317234",
+    "status": "PICKED_UP",
+    "createdAt": "2026-05-29T14:10:21.482Z",
+    "shipmentId": "SHIP687365",
+    "trackingId": "TRK77417695",
+    "courier": "Delhivery",
+    "updatedAt": "2026-05-29T14:16:54.492Z"
+  },
+  {
+    "customerName": "Ronik Agarwal",
+    "phone": "8099450122",
+    "email": "ronikagarwal1404@gmail.com",
+    "address": "srm\nPotheri, SRM Nagar",
+    "city": "Kattankulathur",
+    "state": "Tamil Nadu",
+    "pincode": "603203",
+    "items": [
+      {
+        "id": "resorb-led-720",
+        "sku": "RESORB-LED-720",
+        "name": "RESORB LED 720",
+        "title": "Compatible Remote for Samsung Smart TV (Non-Voice, All Models)",
+        "category": "tv-remotes",
+        "brand": "samsung",
+        "price": 299,
+        "originalPrice": 499,
+        "discount": 40,
+        "rating": 4.5,
+        "reviewCount": 487,
+        "remoteType": "IR",
+        "voiceEnabled": false,
+        "batteryType": "2× AAA",
+        "batteryIncluded": true,
+        "plugAndPlay": true,
+        "image": "https://res.cloudinary.com/resorb/image/upload/v1/products/led-720-front.jpg",
+        "images": [
+          "https://res.cloudinary.com/resorb/image/upload/v1/products/led-720-front.jpg",
+          "https://res.cloudinary.com/resorb/image/upload/v1/products/led-720-back.jpg"
+        ],
+        "description": "Replacement IR remote compatible with Samsung Smart TVs (2016–2024 models). No SmartThings pairing needed. Supports full function including source, menu, and smart hub navigation.",
+        "features": [
+          "Works with 2016–2024 models",
+          "Full button layout",
+          "Plug & Play",
+          "Batteries included"
+        ],
+        "compatibleBrands": [
+          "Samsung"
+        ],
+        "compatibleModels": [
+          "Samsung 32T4340",
+          "Samsung 43AU7700",
+          "Samsung 50AU7700",
+          "Samsung 55AU7700",
+          "Samsung 65AU8000",
+          "Samsung 75AU8000",
+          "Samsung Crystal 4K 43\"",
+          "Samsung Crystal 4K 50\"",
+          "Samsung The Frame 43\"",
+          "Samsung The Frame 55\"",
+          "Samsung QN43Q60B",
+          "Samsung QN55Q70B"
+        ],
+        "warranty": "30 days replacement",
+        "inStock": true,
+        "popular": true,
+        "tags": [
+          "samsung tv remote",
+          "samsung smart tv",
+          "crystal 4k remote",
+          "samsung led remote"
+        ],
+        "quantity": 1
+      }
+    ],
+    "subtotal": 299,
+    "shipping": 60,
+    "total": 359,
+    "id": "RES793278",
+    "status": "ORDER_CONFIRMED",
+    "createdAt": "2026-05-29T14:08:00.272Z"
+  },
+  {
+    "customerName": "Ronik Agarwal",
+    "phone": "9864548325",
+    "email": "",
+    "address": "Kamakhya Colony\nGoswami Building",
+    "city": "Guwahati",
+    "state": "Assam",
+    "pincode": "781012",
+    "items": [
+      {
+        "id": "resorb-led-810",
+        "sku": "RESORB-LED-810",
+        "name": "RESORB LED 810",
+        "title": "Compatible Remote for LG Smart TV (Magic Remote Alternative, IR)",
+        "category": "tv-remotes",
+        "brand": "lg",
+        "price": 279,
+        "originalPrice": 499,
+        "discount": 44,
+        "rating": 4.2,
+        "reviewCount": 218,
+        "remoteType": "IR",
+        "voiceEnabled": false,
+        "batteryType": "2× AAA",
+        "batteryIncluded": true,
+        "plugAndPlay": true,
+        "image": "https://res.cloudinary.com/resorb/image/upload/v1/products/led-810-front.jpg",
+        "images": [
+          "https://res.cloudinary.com/resorb/image/upload/v1/products/led-810-front.jpg",
+          "https://res.cloudinary.com/resorb/image/upload/v1/products/led-810-back.jpg"
+        ],
+        "description": "Standard IR replacement remote for LG Smart TVs. Works as a non-cursor alternative to the LG Magic Remote. All basic and smart functions supported including webOS navigation.",
+        "features": [
+          "webOS navigation support",
+          "No pairing needed",
+          "Plug & Play",
+          "Batteries included"
+        ],
+        "compatibleBrands": [
+          "LG"
+        ],
+        "compatibleModels": [
+          "LG 32LM563BPTC",
+          "LG 43UP7500PTZ",
+          "LG 50UP7500PTZ",
+          "LG 55UP7500PTZ",
+          "LG 65UP8000PTZ",
+          "LG OLED48A2PSA",
+          "LG OLED55C2PSA",
+          "LG OLED65C2PSA",
+          "LG NanoCell 55NANO75SQA",
+          "LG 43UR7500PSC"
+        ],
+        "warranty": "30 days replacement",
+        "inStock": true,
+        "popular": true,
+        "tags": [
+          "lg tv remote",
+          "lg smart tv remote",
+          "webos remote",
+          "lg led remote",
+          "magic remote alternative"
+        ],
+        "quantity": 1
+      },
+      {
+        "id": "resorb-led-720",
+        "sku": "RESORB-LED-720",
+        "name": "RESORB LED 720",
+        "title": "Compatible Remote for Samsung Smart TV (Non-Voice, All Models)",
+        "category": "tv-remotes",
+        "brand": "samsung",
+        "price": 299,
+        "originalPrice": 499,
+        "discount": 40,
+        "rating": 4.5,
+        "reviewCount": 487,
+        "remoteType": "IR",
+        "voiceEnabled": false,
+        "batteryType": "2× AAA",
+        "batteryIncluded": true,
+        "plugAndPlay": true,
+        "image": "https://res.cloudinary.com/resorb/image/upload/v1/products/led-720-front.jpg",
+        "images": [
+          "https://res.cloudinary.com/resorb/image/upload/v1/products/led-720-front.jpg",
+          "https://res.cloudinary.com/resorb/image/upload/v1/products/led-720-back.jpg"
+        ],
+        "description": "Replacement IR remote compatible with Samsung Smart TVs (2016–2024 models). No SmartThings pairing needed. Supports full function including source, menu, and smart hub navigation.",
+        "features": [
+          "Works with 2016–2024 models",
+          "Full button layout",
+          "Plug & Play",
+          "Batteries included"
+        ],
+        "compatibleBrands": [
+          "Samsung"
+        ],
+        "compatibleModels": [
+          "Samsung 32T4340",
+          "Samsung 43AU7700",
+          "Samsung 50AU7700",
+          "Samsung 55AU7700",
+          "Samsung 65AU8000",
+          "Samsung 75AU8000",
+          "Samsung Crystal 4K 43\"",
+          "Samsung Crystal 4K 50\"",
+          "Samsung The Frame 43\"",
+          "Samsung The Frame 55\"",
+          "Samsung QN43Q60B",
+          "Samsung QN55Q70B"
+        ],
+        "warranty": "30 days replacement",
+        "inStock": true,
+        "popular": true,
+        "tags": [
+          "samsung tv remote",
+          "samsung smart tv",
+          "crystal 4k remote",
+          "samsung led remote"
+        ],
+        "quantity": 1
+      }
+    ],
+    "subtotal": 578,
+    "shipping": 0,
+    "total": 578,
+    "id": "RES497924",
+    "status": "ORDER_CONFIRMED",
+    "createdAt": "2026-05-29T14:07:29.465Z"
+  },
+  {
+    "customerName": "Ronik Agarwal",
+    "phone": "8099450121",
+    "email": "ronikagarwal1404@gmail.com",
+    "address": "srm\nPotheri, SRM Nagar",
+    "city": "Kattankulathur",
+    "state": "Tamil Nadu",
+    "pincode": "603203",
+    "items": [
+      {
+        "id": "resorb-led-720",
+        "sku": "RESORB-LED-720",
+        "name": "RESORB LED 720",
+        "title": "Compatible Remote for Samsung Smart TV (Non-Voice, All Models)",
+        "category": "tv-remotes",
+        "brand": "samsung",
+        "price": 299,
+        "originalPrice": 499,
+        "discount": 40,
+        "rating": 4.5,
+        "reviewCount": 487,
+        "remoteType": "IR",
+        "voiceEnabled": false,
+        "batteryType": "2× AAA",
+        "batteryIncluded": true,
+        "plugAndPlay": true,
+        "image": "https://res.cloudinary.com/resorb/image/upload/v1/products/led-720-front.jpg",
+        "images": [
+          "https://res.cloudinary.com/resorb/image/upload/v1/products/led-720-front.jpg",
+          "https://res.cloudinary.com/resorb/image/upload/v1/products/led-720-back.jpg"
+        ],
+        "description": "Replacement IR remote compatible with Samsung Smart TVs (2016–2024 models). No SmartThings pairing needed. Supports full function including source, menu, and smart hub navigation.",
+        "features": [
+          "Works with 2016–2024 models",
+          "Full button layout",
+          "Plug & Play",
+          "Batteries included"
+        ],
+        "compatibleBrands": [
+          "Samsung"
+        ],
+        "compatibleModels": [
+          "Samsung 32T4340",
+          "Samsung 43AU7700",
+          "Samsung 50AU7700",
+          "Samsung 55AU7700",
+          "Samsung 65AU8000",
+          "Samsung 75AU8000",
+          "Samsung Crystal 4K 43\"",
+          "Samsung Crystal 4K 50\"",
+          "Samsung The Frame 43\"",
+          "Samsung The Frame 55\"",
+          "Samsung QN43Q60B",
+          "Samsung QN55Q70B"
+        ],
+        "warranty": "30 days replacement",
+        "inStock": true,
+        "popular": true,
+        "tags": [
+          "samsung tv remote",
+          "samsung smart tv",
+          "crystal 4k remote",
+          "samsung led remote"
+        ],
+        "quantity": 1
+      }
+    ],
+    "subtotal": 299,
+    "shipping": 60,
+    "total": 359,
+    "id": "RES756267",
+    "status": "PICKED_UP",
+    "createdAt": "2026-05-29T14:00:05.316Z",
+    "shipmentId": "SHIP977080",
+    "trackingId": "TRK47885212",
+    "courier": "DTDC",
+    "updatedAt": "2026-05-29T14:01:56.801Z"
+  },
+  {
+    "id": "ORD123456",
+    "customerName": "Rahul Sharma",
+    "phone": "9876543210",
+    "email": "rahul@example.com",
+    "address": "C-12, Sector 15",
+    "city": "Noida",
+    "state": "Uttar Pradesh",
+    "pincode": "201301",
+    "items": [
+      {
+        "name": "RESORB LED 650",
+        "sku": "RESORB-LED-650",
+        "qty": 1,
+        "price": 249
+      }
+    ],
+    "subtotal": 249,
+    "shipping": 60,
+    "total": 309,
+    "status": "ORDER_CONFIRMED",
+    "createdAt": "2026-05-29T14:00:05.304Z"
+  }
+]
