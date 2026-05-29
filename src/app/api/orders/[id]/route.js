@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getOrderById } from "@/lib/mockDb";
+import { supabaseAdmin } from "@/lib/supabase";
 
 export async function GET(request, { params }) {
   const { id } = await params;
@@ -8,9 +8,14 @@ export async function GET(request, { params }) {
   const { searchParams } = new URL(request.url);
   const phone = searchParams.get('phone');
   
-  const order = getOrderById(id);
+  // Fetch from Supabase
+  const { data: order, error } = await supabaseAdmin
+    .from('orders')
+    .select('*')
+    .eq('id', id)
+    .single();
   
-  if (!order) {
+  if (error || !order) {
     return NextResponse.json({ error: "Order not found" }, { status: 404 });
   }
   
@@ -21,10 +26,10 @@ export async function GET(request, { params }) {
 
   // Generate timeline dynamically based on status
   const timeline = [
-    { status: "Order Placed", time: new Date(order.createdAt).toLocaleDateString("en-IN", { hour: "2-digit", minute: "2-digit" }), done: true },
-    { status: "Payment Confirmed", time: new Date(order.createdAt).toLocaleDateString("en-IN", { hour: "2-digit", minute: "2-digit" }), done: true },
+    { status: "Order Placed", time: new Date(order.created_at).toLocaleDateString("en-IN", { hour: "2-digit", minute: "2-digit" }), done: true },
+    { status: "Payment Confirmed", time: new Date(order.created_at).toLocaleDateString("en-IN", { hour: "2-digit", minute: "2-digit" }), done: true },
     { status: "Packed & Ready", time: "Pending", done: order.status === "PICKED_UP" || order.status === "DELIVERED" },
-    { status: "Dispatched", time: order.status === "PICKED_UP" ? new Date(order.updatedAt).toLocaleDateString("en-IN", { hour: "2-digit", minute: "2-digit" }) : "Pending", done: order.status === "PICKED_UP" || order.status === "DELIVERED" },
+    { status: "Dispatched", time: order.status === "PICKED_UP" ? new Date(order.updated_at || order.created_at).toLocaleDateString("en-IN", { hour: "2-digit", minute: "2-digit" }) : "Pending", done: order.status === "PICKED_UP" || order.status === "DELIVERED" },
     { status: "Out for Delivery", time: "Pending", done: order.status === "DELIVERED" },
     { status: "Delivered", time: "Pending", done: order.status === "DELIVERED" },
   ];
@@ -33,7 +38,11 @@ export async function GET(request, { params }) {
   return NextResponse.json({
     order: {
       ...order,
-      timeline
+      timeline,
+      // Map postgres snake_case back to camelCase for the frontend
+      customerName: order.customer_name,
+      createdAt: order.created_at,
+      updatedAt: order.updated_at
     }
   });
 }

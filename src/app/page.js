@@ -199,15 +199,20 @@ function CompatibilityHero() {
           </div>
         </div>
 
-        <div className="mt-auto grid max-w-[720px] -translate-x-3 grid-cols-4 gap-0 text-white">
+        <div className="mt-auto grid w-full max-w-[880px] -translate-x-3 grid-cols-2 gap-4 text-white md:grid-cols-4 md:gap-0">
           {HERO_TRUST_ITEMS.map((item, index) => (
-            <div key={item.title} className={`flex items-center gap-2 ${index > 0 ? "border-l border-white/18 pl-4" : ""}`}>
+            <div
+              key={item.title}
+              className={`flex items-center gap-2 ${
+                index % 2 !== 0 ? "border-l border-white/18 pl-3 sm:pl-4 md:border-l-0 md:pl-0" : ""
+              } ${index > 0 ? "md:border-l md:border-white/18 md:pl-4 lg:pl-5" : ""}`}
+            >
               <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-white/10 text-white">
                 <TrustIcon type={item.icon} />
               </div>
               <div className="min-w-0">
-                <p className="truncate text-[15px] font-semibold leading-tight">{item.title}</p>
-                <p className="mt-0.5 truncate text-xs leading-tight text-white/78">{item.text}</p>
+                <p className="whitespace-nowrap text-[12px] font-semibold leading-tight sm:text-[13.5px]">{item.title}</p>
+                <p className="mt-0.5 whitespace-nowrap text-[10px] leading-tight text-white/78 sm:text-[11.5px]">{item.text}</p>
               </div>
             </div>
           ))}

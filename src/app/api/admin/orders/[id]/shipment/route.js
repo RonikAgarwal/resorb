@@ -1,29 +1,47 @@
 import { NextResponse } from "next/server";
-import { updateOrderStatus, getOrderById } from "@/lib/mockDb";
-
-const COURIERS = ["Delhivery", "BlueDart", "DTDC", "Ekart", "Xpressbees"];
+import { supabaseAdmin } from "@/lib/supabase";
+import { sendPickupNotification } from "@/lib/whatsapp";
 
 export async function POST(request, { params }) {
   const { id } = await params;
   
-  const order = getOrderById(id);
-  if (!order) {
-    return NextResponse.json({ error: "Order not found" }, { status: 404 });
+  const couriers = ["Delhivery", "BlueDart", "DTDC", "Ekart"];
+  const randomCourier = couriers[Math.floor(Math.random() * couriers.length)];
+  const shipmentId = "SHIP" + Math.floor(100000 + Math.random() * 900000);
+  const trackingId = "TRK" + Math.floor(100000 + Math.random() * 900000);
+
+  const updates = {
+    status: "PICKED_UP",
+    shipment_id: shipmentId,
+    tracking_id: trackingId,
+    courier: randomCourier,
+    updated_at: new Date().toISOString()
+  };
+
+  const { data: order, error } = await supabaseAdmin
+    .from('orders')
+    .update(updates)
+    .eq('id', id)
+    .select()
+    .single();
+
+  if (error || !order) {
+    console.error("Error updating order shipment:", error);
+    return NextResponse.json({ error: "Failed to create shipment" }, { status: 500 });
   }
 
-  // Simulate Shiprocket API call
-  await new Promise(r => setTimeout(r, 1000));
+  // Format for frontend and whatsapp
+  const formattedOrder = {
+    ...order,
+    customerName: order.customer_name,
+    createdAt: order.created_at,
+    updatedAt: order.updated_at,
+    trackingId: order.tracking_id,
+    shipmentId: order.shipment_id
+  };
 
-  const shipmentId = "SHIP" + Math.floor(100000 + Math.random() * 900000);
-  const trackingId = "TRK" + Math.floor(10000000 + Math.random() * 90000000);
-  const courier = COURIERS[Math.floor(Math.random() * COURIERS.length)];
+  // Send WhatsApp notification
+  await sendPickupNotification(formattedOrder);
 
-  const updatedOrder = updateOrderStatus(id, {
-    status: "PICKED_UP",
-    shipmentId,
-    trackingId,
-    courier
-  });
-
-  return NextResponse.json({ order: updatedOrder });
+  return NextResponse.json({ success: true, order: formattedOrder });
 }

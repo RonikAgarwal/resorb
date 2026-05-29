@@ -70,10 +70,7 @@ export default function TrackPage() {
         </button>
       </form>
 
-      {/* Demo helper */}
-      <p className="text-xs text-gray-400 mb-6 -mt-4">
-        Try demo: <button onClick={() => {setInput("ORD123456"); setPhone("9876543210");}} className="text-blue-500 underline">ORD123456</button>
-      </p>
+      {/* Demo helper removed */}
 
       {error && (
         <div className="bg-red-50 border border-red-100 rounded-xl p-4 mb-6">

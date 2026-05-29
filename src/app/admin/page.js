@@ -3,7 +3,7 @@ import { products } from "@/data/products";
 import { categories } from "@/data/categories";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { getOrders } from "@/lib/mockDb";
+import { supabaseAdmin } from "@/lib/supabase";
 
 export const metadata = { title: "Admin Dashboard — RESORB" };
 
@@ -20,8 +20,13 @@ export default async function AdminDashboard() {
     redirect("/admin/login");
   }
 
-  // Fetch from mock DB instead of API to avoid fetch absolute URL issue in Server Components
-  const orders = getOrders();
+  const { data: rawOrders } = await supabaseAdmin.from('orders').select('*').order('created_at', { ascending: false });
+  const orders = (rawOrders || []).map(order => ({
+    ...order,
+    customerName: order.customer_name,
+    createdAt: order.created_at,
+    updatedAt: order.updated_at
+  }));
   
   const totalRevenue = orders.reduce((sum, order) => sum + order.total, 0);
   const pendingOrders = orders.filter(o => o.status === "ORDER_CONFIRMED").length;

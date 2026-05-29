@@ -76,7 +76,7 @@ function FooterHeading({ children }) {
 export default function Footer() {
   return (
     <footer className="relative overflow-hidden text-slate-300">
-      <section className="relative h-[90px] sm:h-[110px] overflow-hidden bg-[#1C2E6B]" aria-labelledby="compatibility-strip-heading">
+      <section className="relative h-[105px] sm:h-[130px] overflow-hidden bg-[#1C2E6B]" aria-labelledby="compatibility-strip-heading">
         <Image
           src="/images/brand/resorb-compatibility-footer.png"
           alt="Trusted compatibility with Samsung, LG, Sony, Mi, Panasonic, Voltas, and Tata Play."

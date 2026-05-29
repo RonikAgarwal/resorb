@@ -1,0 +1,20 @@
+CREATE TABLE orders (
+  id TEXT PRIMARY KEY,
+  customer_name TEXT NOT NULL,
+  phone TEXT NOT NULL,
+  email TEXT,
+  address TEXT NOT NULL,
+  city TEXT NOT NULL,
+  state TEXT NOT NULL,
+  pincode TEXT NOT NULL,
+  items JSONB NOT NULL,
+  subtotal INTEGER NOT NULL,
+  shipping INTEGER NOT NULL DEFAULT 0,
+  total INTEGER NOT NULL,
+  status TEXT NOT NULL DEFAULT 'ORDER_CONFIRMED',
+  shipment_id TEXT,
+  tracking_id TEXT,
+  courier TEXT,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
