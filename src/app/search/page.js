@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import { searchProducts } from "@/data/products";
 import { getCategoryBySlug } from "@/data/categories";
 import { getBrandBySlug } from "@/data/brands";
-import ProductCard from "@/components/ProductCard";
+import ProductCard from "@/components/product/ProductCard";
 
 export const metadata = {
   title: "Search Results",

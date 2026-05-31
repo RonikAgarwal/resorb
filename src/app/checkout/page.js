@@ -31,6 +31,18 @@ export default function CheckoutPage() {
 
   useEffect(() => {
     if (cartIsEmpty) router.replace("/cart");
+    
+    // Load Razorpay script
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    script.async = true;
+    document.body.appendChild(script);
+    
+    return () => {
+      if (document.body.contains(script)) {
+        document.body.removeChild(script);
+      }
+    };
   }, [cartIsEmpty, router]);
 
   if (cartIsEmpty) return null;
@@ -54,30 +66,75 @@ export default function CheckoutPage() {
     setLoading(true);
 
     try {
-      // POST to our local mock API
-      const res = await fetch("/api/orders", {
+      // 1. Create a Razorpay order on the backend
+      const res = await fetch("/api/razorpay/create-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...form,
-          items,
-          subtotal: totalPrice,
-          shipping,
-          total: grandTotal,
-        }),
+        body: JSON.stringify({ amount: grandTotal }),
       });
-      
       const data = await res.json();
       
-      if (data.success) {
-        // Navigate FIRST, then clear cart after a tick —
-        // otherwise the cartIsEmpty useEffect fires and redirects to /cart
-        router.push(`/order-success?id=${data.orderId}&phone=${form.phone}`);
-        setTimeout(() => clearCart(), 500);
-      } else {
-        alert("Failed to place order. Please try again.");
+      if (!data.success) {
+        alert("Failed to initiate payment. Please try again.");
         setLoading(false);
+        return;
       }
+
+      // 2. Initialize Razorpay Checkout
+      const options = {
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "rzp_test_SvqZL7l37Kz4JU",
+        amount: data.order.amount,
+        currency: "INR",
+        name: "RESORB",
+        description: "Replacement Remote Order",
+        order_id: data.order.id,
+        handler: async function (response) {
+          try {
+            // 3. Confirm payment and create order in our database
+            const confirmRes = await fetch("/api/orders", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                ...form,
+                items,
+                subtotal: totalPrice,
+                shipping,
+                total: grandTotal,
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_signature: response.razorpay_signature,
+              }),
+            });
+            
+            const confirmData = await confirmRes.json();
+            
+            if (confirmData.success) {
+              router.push(`/order-success?id=${confirmData.orderId}&phone=${form.phone}`);
+              setTimeout(() => clearCart(), 500);
+            } else {
+              alert("Payment verification failed. Please contact support.");
+            }
+          } catch (err) {
+            console.error(err);
+            alert("Error confirming order. Please contact support.");
+          }
+        },
+        prefill: {
+          name: form.name,
+          email: form.email,
+          contact: form.phone,
+        },
+        theme: {
+          color: "#2563EB", // blue-600
+        },
+      };
+
+      const paymentObject = new window.Razorpay(options);
+      paymentObject.open();
+      
+      // Stop loading once modal is open
+      setLoading(false);
+      
     } catch (err) {
       console.error(err);
       alert("An error occurred. Please try again.");

@@ -1,7 +1,8 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import ResorbWordmark from "@/components/ResorbWordmark";
+import ResorbWordmark from "@/components/ui/ResorbWordmark";
+import { DashboardIcon, PackageIcon, SettingsSliderIcon } from "@/components/icons";
 
 export default async function AdminLayout({ children }) {
   const cookieStore = await cookies();
@@ -32,14 +33,17 @@ export default async function AdminLayout({ children }) {
           </Link>
         </div>
         <nav className="flex-1 p-4 space-y-1">
-          <Link href="/admin" className="block px-4 py-3 rounded-lg hover:bg-white/10 transition-colors text-sm font-medium">
-            📊 Dashboard
+          <Link href="/admin" className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-white/10 transition-colors text-sm font-medium">
+            <DashboardIcon className="w-5 h-5 opacity-80" />
+            Dashboard
           </Link>
-          <Link href="/admin/orders" className="block px-4 py-3 rounded-lg hover:bg-white/10 transition-colors text-sm font-medium">
-            📦 Orders
+          <Link href="/admin/orders" className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-white/10 transition-colors text-sm font-medium">
+            <PackageIcon className="w-5 h-5 opacity-80" />
+            Orders
           </Link>
-          <Link href="/admin/products" className="block px-4 py-3 rounded-lg hover:bg-white/10 transition-colors text-sm font-medium">
-            🎛️ Products
+          <Link href="/admin/products" className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-white/10 transition-colors text-sm font-medium">
+            <SettingsSliderIcon className="w-5 h-5 opacity-80" />
+            Products
           </Link>
         </nav>
         <div className="p-4 border-t border-white/10">

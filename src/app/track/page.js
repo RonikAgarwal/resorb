@@ -15,17 +15,17 @@ export default function TrackPage() {
     e.preventDefault();
     setError("");
     setOrder(null);
-    if (!input.trim() || !phone.trim()) { 
-      setError("Please enter both Order ID and Phone Number"); 
-      return; 
+    if (!input.trim() || !phone.trim()) {
+      setError("Please enter both Order ID and Phone Number");
+      return;
     }
-    
+
     setLoading(true);
 
     try {
       const res = await fetch(`/api/orders/${input.trim().toUpperCase()}?phone=${encodeURIComponent(phone.trim())}`);
       const data = await res.json();
-      
+
       if (res.ok && data.order) {
         setOrder(data.order);
       } else {
@@ -95,11 +95,10 @@ export default function TrackPage() {
                 <p className="text-xs text-gray-400 mb-0.5">Order ID</p>
                 <p className="font-mono font-semibold text-gray-900">{order.id}</p>
               </div>
-              <span className={`text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full ${
-                order.status === "DELIVERED" ? "bg-green-100 text-green-700" :
+              <span className={`text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full ${order.status === "DELIVERED" ? "bg-green-100 text-green-700" :
                 order.status === "PICKED_UP" ? "bg-blue-100 text-blue-700" :
-                "bg-amber-100 text-amber-700"
-              }`}>
+                  "bg-amber-100 text-amber-700"
+                }`}>
                 {order.status.replace("_", " ")}
               </span>
             </div>
@@ -118,9 +117,8 @@ export default function TrackPage() {
             <div className="space-y-3 mt-4">
               {order.timeline.map((step, i) => (
                 <div key={i} className="flex items-start gap-3">
-                  <div className={`w-5 h-5 rounded-full flex-shrink-0 flex items-center justify-center mt-0.5 ${
-                    step.done ? "bg-green-500" : "bg-gray-200"
-                  }`}>
+                  <div className={`w-5 h-5 rounded-full flex-shrink-0 flex items-center justify-center mt-0.5 ${step.done ? "bg-green-500" : "bg-gray-200"
+                    }`}>
                     {step.done ? (
                       <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -161,7 +159,7 @@ export default function TrackPage() {
       {!order && !error && (
         <div className="bg-green-50 border border-green-100 rounded-xl p-4 mt-4">
           <p className="text-sm text-gray-700 mb-2">
-            <strong>Can&apos;t find your order?</strong> WhatsApp us with your phone number and we&apos;ll fetch the details for you.
+            <strong>Can&apos;t find your order? </strong>  WhatsApp us with your phone number and we&apos;ll fetch the details for you.
           </p>
           <a
             href="https://wa.me/919876543210?text=Hi%2C%20I%20need%20help%20tracking%20my%20order.%20My%20number%20is%3A"

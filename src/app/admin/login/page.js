@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import ResorbWordmark from "@/components/ResorbWordmark";
+import ResorbWordmark from "@/components/ui/ResorbWordmark";
 
 export default function AdminLogin() {
   const [email, setEmail] = useState("");

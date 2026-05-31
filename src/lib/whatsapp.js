@@ -1,30 +1,20 @@
-import twilio from 'twilio';
-
-const accountSid = process.env.TWILIO_ACCOUNT_SID;
-const authToken = process.env.TWILIO_AUTH_TOKEN;
-const twilioWhatsAppFrom = process.env.TWILIO_WHATSAPP_FROM;
-
-let client = null;
-if (accountSid && authToken) {
-  try {
-    client = twilio(accountSid, authToken);
-  } catch (error) {
-    console.error("Failed to initialize Twilio client:", error);
-  }
-}
+const accessToken = process.env.WHATSAPP_CLOUD_TOKEN;
+const phoneNumberId = process.env.WHATSAPP_PHONE_NUMBER_ID;
 
 /**
- * Sends a WhatsApp message via Twilio.
- * Falls back to console.log if Twilio isn't configured properly.
+ * Sends a WhatsApp message via WhatsApp Cloud API.
+ * Falls back to console.log if credentials aren't configured properly.
  */
 async function sendWhatsApp(toPhone, message) {
-  // Format phone number to E.164. Assuming India (+91) if no country code provided.
-  let formattedPhone = toPhone.trim();
-  if (!formattedPhone.startsWith('+')) {
-    formattedPhone = '+91' + formattedPhone;
+  // Format phone number to E.164 without the plus sign for WhatsApp Cloud API.
+  let formattedPhone = toPhone.trim().replace('+', '');
+  
+  // Assuming India (91) if no country code provided.
+  if (formattedPhone.length === 10) {
+    formattedPhone = '91' + formattedPhone;
   }
   
-  if (!client || !twilioWhatsAppFrom) {
+  if (!accessToken || !phoneNumberId) {
     console.log(`\n========================================`);
     console.log(`💬 [SIMULATED WHATSAPP TO ${formattedPhone}]`);
     console.log(`${message}`);
@@ -33,13 +23,36 @@ async function sendWhatsApp(toPhone, message) {
   }
 
   try {
-    const response = await client.messages.create({
-      body: message,
-      from: twilioWhatsAppFrom,
-      to: `whatsapp:${formattedPhone}`
-    });
-    console.log(`WhatsApp sent successfully to ${formattedPhone}, SID: ${response.sid}`);
-    return true;
+    const response = await fetch(
+      `https://graph.facebook.com/v17.0/${phoneNumberId}/messages`,
+      {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          messaging_product: "whatsapp",
+          recipient_type: "individual",
+          to: formattedPhone,
+          type: "text",
+          text: {
+            preview_url: false,
+            body: message
+          }
+        }),
+      }
+    );
+
+    const data = await response.json();
+    
+    if (response.ok) {
+      console.log(`WhatsApp sent successfully to ${formattedPhone}, Message ID: ${data.messages[0].id}`);
+      return true;
+    } else {
+      console.error(`Error from WhatsApp API to ${formattedPhone}:`, data.error);
+      return false;
+    }
   } catch (error) {
     console.error(`Error sending WhatsApp to ${formattedPhone}:`, error);
     return false;
@@ -47,7 +60,7 @@ async function sendWhatsApp(toPhone, message) {
 }
 
 export async function sendOrderConfirmation(order) {
-  const itemsText = order.items.map(item => `${item.qty}x ${item.name}`).join(', ');
+  const itemsText = order.items.map(item => `${item.quantity || item.qty || 1}x ${item.name}`).join(', ');
   
   const message = `🎉 *Order Confirmed!*\n\nHi ${order.customerName || 'Customer'},\nThank you for shopping at RESORB.\n\n*Order ID:* ${order.id}\n*Items:* ${itemsText}\n*Total:* ₹${order.total}\n\nWe will notify you once your order is shipped.\n\nTrack your order anytime at: https://resorb.in/track`;
   

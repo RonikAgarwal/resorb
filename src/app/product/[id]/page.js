@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import ProductCard from "@/components/ProductCard";
-import AddToCartButton from "@/components/AddToCartButton";
+import ProductCard from "@/components/product/ProductCard";
+import AddToCartButton from "@/components/product/AddToCartButton";
 import { getProductById, getRelatedProducts } from "@/data/products";
 import { getCategoryBySlug } from "@/data/categories";
 

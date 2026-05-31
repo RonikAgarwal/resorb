@@ -4,6 +4,7 @@ import { categories } from "@/data/categories";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { supabaseAdmin } from "@/lib/supabase";
+import { PackageIcon, BanknotesIcon, SettingsSliderIcon, ClockIcon, UploadIcon, ClipboardIcon, ChartPieIcon } from "@/components/icons";
 
 export const metadata = { title: "Admin Dashboard — RESORB" };
 
@@ -32,10 +33,10 @@ export default async function AdminDashboard() {
   const pendingOrders = orders.filter(o => o.status === "ORDER_CONFIRMED").length;
 
   const stats = [
-    { label: "Total Orders", value: orders.length.toString(), change: "All time", icon: "📦" },
-    { label: "Revenue", value: `₹${totalRevenue.toLocaleString()}`, change: "All time", icon: "💰" },
-    { label: "Products", value: products.length.toString(), change: `${categories.length} categories`, icon: "🎛️" },
-    { label: "Pending Shipments", value: pendingOrders.toString(), change: "Needs action", icon: "⏳" },
+    { label: "Total Orders", value: orders.length.toString(), change: "All time", icon: <PackageIcon className="w-6 h-6 text-blue-600" /> },
+    { label: "Revenue", value: `₹${totalRevenue.toLocaleString()}`, change: "All time", icon: <BanknotesIcon className="w-6 h-6 text-green-600" /> },
+    { label: "Products", value: products.length.toString(), change: `${categories.length} categories`, icon: <SettingsSliderIcon className="w-6 h-6 text-purple-600" /> },
+    { label: "Pending Shipments", value: pendingOrders.toString(), change: "Needs action", icon: <ClockIcon className="w-6 h-6 text-amber-600" /> },
   ];
 
   return (
@@ -58,7 +59,7 @@ export default async function AdminDashboard() {
         {stats.map((stat) => (
           <div key={stat.label} className="bg-white border border-gray-200 rounded-xl p-4">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-2xl">{stat.icon}</span>
+              <div className="p-2 bg-gray-50 rounded-lg">{stat.icon}</div>
               <span className="text-xs text-gray-400">{stat.change}</span>
             </div>
             <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
@@ -132,16 +133,17 @@ export default async function AdminDashboard() {
             <h2 className="font-semibold text-gray-900 mb-3">Quick Actions</h2>
             <div className="space-y-2">
               {[
-                { label: "📦 Upload products (Excel)", href: "/admin/products/upload" },
-                { label: "🎛️ Manage products", href: "/admin/products" },
-                { label: "📋 View all orders", href: "/admin/orders" },
-                { label: "📊 Sales report", href: "/admin/reports" },
+                { label: "Upload products (Excel)", icon: <UploadIcon className="w-4 h-4" />, href: "/admin/products/upload" },
+                { label: "Manage products", icon: <SettingsSliderIcon className="w-4 h-4" />, href: "/admin/products" },
+                { label: "View all orders", icon: <ClipboardIcon className="w-4 h-4" />, href: "/admin/orders" },
+                { label: "Sales report", icon: <ChartPieIcon className="w-4 h-4" />, href: "/admin/reports" },
               ].map((action) => (
                 <Link
                   key={action.href}
                   href={action.href}
-                  className="flex items-center text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50 px-3 py-2 rounded-lg transition-colors"
+                  className="flex items-center gap-3 text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50 px-3 py-2.5 rounded-lg transition-colors font-medium"
                 >
+                  <span className="text-gray-400 group-hover:text-blue-500">{action.icon}</span>
                   {action.label}
                 </Link>
               ))}
@@ -154,7 +156,9 @@ export default async function AdminDashboard() {
             <div className="space-y-2">
               {categories.map((cat) => (
                 <div key={cat.id} className="flex items-center justify-between text-sm">
-                  <span className="text-gray-600">{cat.icon} {cat.name}</span>
+                  <span className="text-gray-600 font-medium">
+                    {cat.name}
+                  </span>
                   <span className="font-medium text-gray-900 text-xs bg-gray-100 px-2 py-0.5 rounded-full">
                     {cat.productCount}
                   </span>
