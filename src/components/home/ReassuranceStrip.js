@@ -8,10 +8,7 @@ const ITEMS = [
 
 export default function ReassuranceStrip() {
   return (
-    <section
-      className="border-b border-[#DDECEE] bg-white md:hidden"
-      aria-label="Store reassurance"
-    >
+    <section className="border-b border-[#DDECEE] bg-white pt-0 md:hidden" aria-label="Store reassurance">
       <div className="mx-auto flex max-w-7xl items-stretch divide-x divide-[#DDECEE] px-4 py-2.5">
         {ITEMS.map(({ label, icon: Icon }) => (
           <div key={label} className="flex flex-1 items-center justify-center gap-1.5 px-1">

@@ -131,7 +131,21 @@ body {
   scrollbar-width: none;
 }
 
-/* Focus styles — accessibility */
+/* Mobile search overlay slide-down */
+@keyframes mobile-search-slide-down {
+  from {
+    transform: translateY(-12px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.mobile-search-slide-down {
+  animation: mobile-search-slide-down 240ms ease-out forwards;
+}
+
 *:focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;

@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 const LOGO_SIZES = {
+  xs: { width: 114, height: 36 },
   sm: { width: 125, height: 40 },
   md: { width: 158, height: 50 },
   lg: { width: 238, height: 76 },

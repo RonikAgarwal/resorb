@@ -3,16 +3,6 @@ import Link from "next/link";
 import ResorbWordmark from "@/components/ui/ResorbWordmark";
 import { WhatsAppIcon } from "@/components/icons";
 
-const CATEGORY_LINKS = [
-  { name: "TV Remotes", href: "/category/tv-remotes" },
-  { name: "AC Remotes", href: "/category/ac-remotes" },
-  { name: "Set-Top Box", href: "/category/set-top-box-remotes" },
-  { name: "Home Theatre", href: "/category/speaker-remotes" },
-  { name: "Streaming", href: "/category/streaming-remotes" },
-  { name: "Projector", href: "/category/projector-remotes" },
-  { name: "Universal", href: "/category/universal-remotes" },
-];
-
 const SUPPORT_LINKS = [
   { name: "Track Order", href: "/track" },
   { name: "Return Policy", href: "/return-policy" },
@@ -69,7 +59,7 @@ function FooterHeading({ children }) {
 export default function Footer() {
   return (
     <footer className="relative overflow-hidden text-slate-300">
-      <section className="relative h-[105px] sm:h-[130px] overflow-hidden bg-[#1C2E6B]" aria-labelledby="compatibility-strip-heading">
+      <section className="relative hidden h-[130px] overflow-hidden bg-[#1C2E6B] lg:block" aria-labelledby="compatibility-strip-heading">
         <Image
           src="/images/brand/resorb-compatibility-footer.png"
           alt="Trusted compatibility with Samsung, LG, Sony, Mi, Panasonic, Voltas, and Tata Play."
@@ -93,8 +83,61 @@ export default function Footer() {
       <section className="relative bg-[#1C2E6B]">
         <div className="absolute inset-x-0 top-0 h-px bg-white/10" />
 
-        <div className="relative mx-auto max-w-7xl px-4 py-6">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8">
+        <div className="relative mx-auto max-w-7xl px-4 py-5 lg:py-6">
+          {/* Mobile layout */}
+          <div className="flex flex-col gap-5 lg:hidden">
+            <div>
+              <ResorbWordmark size="sm" light={true} />
+              <p className="mt-2 text-[13px] leading-relaxed text-slate-300">
+                India&apos;s trusted replacement remote store.
+              </p>
+              <p className="mt-1 text-[13px] leading-relaxed text-slate-400">
+                Verified compatibility across 10,000+ device models.
+              </p>
+              <div className="mt-3 flex items-center gap-2">
+                <div className="flex h-6 w-6 items-center justify-center rounded-full bg-[#009B9B]/20 text-[#20D6C7]">
+                  <WhatsAppIcon className="h-3.5 w-3.5" />
+                </div>
+                <a
+                  href="tel:+919876543210"
+                  className="text-sm font-semibold text-[#20D6C7] transition-colors hover:text-white"
+                >
+                  +91 98765 43210
+                </a>
+              </div>
+            </div>
+
+            <div>
+              <FooterHeading>Support</FooterHeading>
+              <ul className="mt-3 space-y-2">
+                {SUPPORT_LINKS.map((item) => (
+                  <li key={item.href}>
+                    <Link href={item.href} className="text-[13px] text-slate-400 transition-colors hover:text-white">
+                      {item.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="flex items-center gap-2.5">
+              <a href="#" className="flex h-8 w-8 items-center justify-center rounded-full bg-white/5 text-slate-400 transition-colors hover:bg-white/10 hover:text-white" aria-label="Facebook">
+                <FacebookIcon />
+              </a>
+              <a href="#" className="flex h-8 w-8 items-center justify-center rounded-full bg-white/5 text-slate-400 transition-colors hover:bg-white/10 hover:text-white" aria-label="Instagram">
+                <InstagramIcon />
+              </a>
+              <a href="#" className="flex h-8 w-8 items-center justify-center rounded-full bg-white/5 text-slate-400 transition-colors hover:bg-white/10 hover:text-white" aria-label="YouTube">
+                <YouTubeIcon />
+              </a>
+              <a href="mailto:support@resorb.in" className="flex h-8 w-8 items-center justify-center rounded-full bg-white/5 text-slate-400 transition-colors hover:bg-white/10 hover:text-white" aria-label="Email">
+                <EmailIcon />
+              </a>
+            </div>
+          </div>
+
+          {/* Desktop layout — unchanged */}
+          <div className="hidden grid-cols-1 gap-6 md:grid-cols-3 md:gap-8 lg:grid">
             <div className="md:pr-4">
               <div className="mb-2">
                 <ResorbWordmark size="sm" light={true} />
@@ -132,19 +175,6 @@ export default function Footer() {
                   <EmailIcon />
                 </a>
               </div>
-            </div>
-
-            <div className="pl-0 md:pl-6">
-              <FooterHeading>Categories</FooterHeading>
-              <ul className="mt-4 space-y-2">
-                {CATEGORY_LINKS.map((item) => (
-                  <li key={item.href}>
-                    <Link href={item.href} className="text-[13.5px] text-slate-400 transition-colors hover:text-white">
-                      {item.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
             </div>
 
             <div>
@@ -196,7 +226,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-white/10 mt-0">
-          <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 py-3 text-[12.5px] text-white/60 md:flex-row">
+          <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-3 text-[12px] text-white/60 md:flex-row md:gap-3 md:text-[12.5px]">
             <p>© 2025 RESORB. All rights reserved.</p>
             <div className="flex items-center gap-4">
               <Link href="/terms" className="hover:text-slate-300 transition-colors">Terms of Service</Link>

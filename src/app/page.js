@@ -1,6 +1,7 @@
 import CompatibilityHero from "@/components/home/CompatibilityHero";
 import FeaturedProducts from "@/components/home/FeaturedProducts";
 import DeviceTypeSection from "@/components/home/DeviceTypeSection";
+import WhatsAppHelpSection from "@/components/home/WhatsAppHelpSection";
 import VideoSection from "@/components/home/VideoSection";
 import { getPopularProducts } from "@/data/products";
 
@@ -17,9 +18,10 @@ export default function HomePage() {
     <div className="bg-white">
       <CompatibilityHero />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 lg:px-4">
         <DeviceTypeSection />
         <FeaturedProducts products={featuredProducts} />
+        <WhatsAppHelpSection />
         <VideoSection />
       </div>
     </div>

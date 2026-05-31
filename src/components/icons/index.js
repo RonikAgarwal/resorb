@@ -4,9 +4,17 @@
  * Import specific icons: import { SearchIcon, ChevronDownIcon } from "@/components/icons";
  */
 
-export function SearchIcon({ className = "w-5 h-5" }) {
+export function MenuIcon({ className = "w-6 h-6", strokeWidth = 2 }) {
   return (
-    <svg className={className} fill="none" stroke="currentColor" strokeWidth={2.4} viewBox="0 0 24 24">
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth={strokeWidth} viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+    </svg>
+  );
+}
+
+export function SearchIcon({ className = "w-5 h-5", strokeWidth = 2.4 }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth={strokeWidth} viewBox="0 0 24 24">
       <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" />
     </svg>
   );
@@ -61,17 +69,17 @@ export function ShieldCheckIcon({ className = "w-5 h-5" }) {
   );
 }
 
-export function FilterIcon({ className = "w-4 h-4" }) {
+export function FilterIcon({ className = "w-4 h-4", strokeWidth = 2 }) {
   return (
-    <svg className={className} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth={strokeWidth} viewBox="0 0 24 24">
       <path strokeLinecap="round" strokeLinejoin="round" d="M3 4.5h18M6.75 12h10.5M10.5 19.5h3" />
     </svg>
   );
 }
 
-export function CartIcon({ className = "w-5 h-5" }) {
+export function CartIcon({ className = "w-5 h-5", strokeWidth = 1.8 }) {
   return (
-    <svg className={className} fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth={strokeWidth} viewBox="0 0 24 24">
       <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.836l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
     </svg>
   );
