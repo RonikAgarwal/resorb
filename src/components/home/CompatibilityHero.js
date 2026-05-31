@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { SearchIcon, ShieldCheckIcon, PlugIcon, RefreshIcon, ChatIcon } from "@/components/icons";
+import MobileCompatibilityHero from "@/components/home/MobileCompatibilityHero";
+import ReassuranceStrip from "@/components/home/ReassuranceStrip";
 
 const QUICK_SEARCHES = [
   { label: "Samsung TV", href: "/search?q=Samsung%20TV" },
@@ -39,10 +41,10 @@ function TrustIcon({ type }) {
   return <ShieldCheckIcon className="h-5 w-5" />;
 }
 
-export default function CompatibilityHero() {
+function DesktopCompatibilityHero() {
   return (
     <section
-      className="relative min-h-[620px] overflow-hidden bg-[#080f23] lg:h-[520px] lg:min-h-0"
+      className="relative hidden min-h-[620px] overflow-hidden bg-[#080f23] md:block lg:h-[520px] lg:min-h-0"
       aria-labelledby="finder-heading"
     >
       <Image
@@ -137,5 +139,15 @@ export default function CompatibilityHero() {
         </div>
       </div>
     </section>
+  );
+}
+
+export default function CompatibilityHero() {
+  return (
+    <>
+      <MobileCompatibilityHero />
+      <DesktopCompatibilityHero />
+      <ReassuranceStrip />
+    </>
   );
 }
