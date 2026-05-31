@@ -14,7 +14,7 @@ const INDIAN_STATES = [
 ];
 
 export default function CheckoutPage() {
-  const { items, totalPrice, totalDiscount, clearCart } = useCart();
+  const { items, totalPrice, totalDiscount } = useCart();
   const router = useRouter();
 
   const shipping = totalPrice >= 499 ? 0 : 60;
@@ -110,7 +110,6 @@ export default function CheckoutPage() {
             
             if (confirmData.success) {
               router.push(`/order-success?id=${confirmData.orderId}&phone=${form.phone}`);
-              setTimeout(() => clearCart(), 500);
             } else {
               alert("Payment verification failed. Please contact support.");
             }

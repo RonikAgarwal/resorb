@@ -3,6 +3,7 @@
 import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { useCart } from "@/context/CartContext";
 
 const STAGES = {
   PROCESSING: 0,
@@ -15,14 +16,18 @@ function OrderSuccessContent() {
   const orderId = searchParams.get("id");
   const phone = searchParams.get("phone");
   const [stage, setStage] = useState(STAGES.PROCESSING);
+  const { clearCart } = useCart();
 
   useEffect(() => {
+    // Clear the cart when landing on the success page
+    clearCart();
+
     // Stage 1: Show processing for 2.5s
     const t1 = setTimeout(() => setStage(STAGES.SUCCESS), 2500);
     // Stage 2: Show details after 4.5s
     const t2 = setTimeout(() => setStage(STAGES.DETAILS), 4500);
     return () => { clearTimeout(t1); clearTimeout(t2); };
-  }, []);
+  }, [clearCart]);
 
   return (
     <div className="min-h-[85vh] flex items-center justify-center px-4 py-12 bg-gradient-to-b from-gray-50 to-white">
