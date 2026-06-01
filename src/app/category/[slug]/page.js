@@ -3,14 +3,9 @@ import Image from "next/image";
 import Link from "next/link";
 import ProductCard from "@/components/product/ProductCard";
 import { getCategoryBySlug } from "@/data/categories";
-import { getProductsByCategory } from "@/data/products";
+import { getProductsByCategory } from "@/lib/products";
 import { getBrandsByCategory } from "@/data/brands";
 
-/*
-  Category hero images — shown at the top of MAIN category pages only.
-  When user clicks a brand filter, they go to /search which doesn't show these.
-  File naming: /public/images/category-heroes/{category-slug}.{jpg|jpeg}
-*/
 const CATEGORY_HEROES = {
   "tv-remotes": {
     src: "/images/category-heroes/tv-remotes.jpg",
@@ -49,6 +44,8 @@ const CATEGORY_HEROES = {
   },
 };
 
+export const dynamic = "force-dynamic";
+
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const category = getCategoryBySlug(slug);
@@ -64,14 +61,14 @@ export default async function CategoryPage({ params }) {
   const category = getCategoryBySlug(slug);
   if (!category) notFound();
 
-  const products = getProductsByCategory(slug);
+  const products = await getProductsByCategory(slug);
   const brands = getBrandsByCategory(slug);
   const heroImage = CATEGORY_HEROES[slug];
 
   return (
     <div className="bg-white">
 
-      {/* ── Hero Banner — full-width, no compression, only on main category ── */}
+      {/* ── Hero Banner ── */}
       {heroImage && (
         <div className="w-full bg-white">
           <div className="w-full max-w-[1800px] mx-auto">

@@ -1,4 +1,4 @@
-import { searchProducts } from "@/data/products";
+// Products are now in Supabase — search via API for live results
 import { brands } from "@/data/brands";
 import { categories } from "@/data/categories";
 
@@ -11,6 +11,20 @@ export const POPULAR_SEARCHES = [
 
 function matchesQuery(value, q) {
   return (value || "").toLowerCase().includes(q);
+}
+
+/**
+ * Fetch products from the API (client-side)
+ */
+async function fetchSearchProducts(query) {
+  if (!query || query.trim().length < 2) return [];
+  try {
+    const res = await fetch(`/api/products?q=${encodeURIComponent(query)}`);
+    const data = await res.json();
+    return data.success ? data.products : [];
+  } catch {
+    return [];
+  }
 }
 
 export function searchBrands(query = "", limit = 5) {
@@ -42,7 +56,7 @@ export function searchCategories(query = "", limit = 4) {
     .slice(0, limit);
 }
 
-export function getSearchSuggestions(query = "", limit = 6) {
+export async function getSearchSuggestions(query = "", limit = 6) {
   const q = query.trim().toLowerCase();
   if (!q) return [];
 
@@ -56,12 +70,11 @@ export function getSearchSuggestions(query = "", limit = 6) {
   searchCategories(q, 8).forEach((c) => suggestions.add(c.name));
 
   if (q.length >= 2) {
-    const products = searchProducts(query);
+    const products = await fetchSearchProducts(query);
     products.forEach((p) => {
-      suggestions.add(p.name);
-      if (matchesQuery(p.sku, q)) suggestions.add(p.sku);
       if (matchesQuery(p.title, q)) suggestions.add(p.title);
-      p.compatibleModels.forEach((model) => {
+      if (matchesQuery(p.sku, q)) suggestions.add(p.sku);
+      (p.compatible_models || []).forEach((model) => {
         if (matchesQuery(model, q)) suggestions.add(model);
       });
     });
@@ -70,7 +83,7 @@ export function getSearchSuggestions(query = "", limit = 6) {
   return [...suggestions].slice(0, limit);
 }
 
-export function getLiveSearchResults(query = "", options = {}) {
+export async function getLiveSearchResults(query = "", options = {}) {
   const {
     productLimit = 5,
     brandLimit = 4,
@@ -88,10 +101,10 @@ export function getLiveSearchResults(query = "", options = {}) {
     };
   }
 
-  const products = q.length >= 2 ? searchProducts(q).slice(0, productLimit) : [];
+  const products = q.length >= 2 ? (await fetchSearchProducts(q)).slice(0, productLimit) : [];
   const matchedBrands = searchBrands(q, brandLimit);
   const matchedCategories = searchCategories(q, categoryLimit);
-  const suggestions = getSearchSuggestions(q, suggestionLimit);
+  const suggestions = await getSearchSuggestions(q, suggestionLimit);
 
   return {
     suggestions,
@@ -103,9 +116,8 @@ export function getLiveSearchResults(query = "", options = {}) {
 
 /**
  * Desktop autocomplete sections — Brands, Categories, Products, Popular Searches.
- * Each item includes a searchTerm used when the user selects it.
  */
-export function getDesktopAutocompleteSections(query = "", options = {}) {
+export async function getDesktopAutocompleteSections(query = "", options = {}) {
   const {
     brandLimit = 5,
     categoryLimit = 5,
@@ -164,30 +176,31 @@ export function getDesktopAutocompleteSections(query = "", options = {}) {
   const seenProductLabels = new Set();
 
   if (qLower.length >= 2) {
-    const matchedProducts = searchProducts(q);
+    const matchedProducts = await fetchSearchProducts(q);
 
     for (const product of matchedProducts) {
       if (productsSection.length >= productLimit) break;
-      if (seenProductLabels.has(product.name)) continue;
-      seenProductLabels.add(product.name);
+      const label = product.title;
+      if (seenProductLabels.has(label)) continue;
+      seenProductLabels.add(label);
       productsSection.push({
         id: `product-${product.id}`,
-        label: product.name,
+        label: product.title,
         subtitle: product.title,
-        searchTerm: product.name,
+        searchTerm: product.title,
       });
     }
 
     const seenModels = new Set();
     for (const product of matchedProducts) {
-      for (const model of product.compatibleModels) {
+      for (const model of (product.compatible_models || [])) {
         if (productsSection.length >= productLimit + modelLimit) break;
         if (!matchesQuery(model, qLower) || seenModels.has(model)) continue;
         seenModels.add(model);
         productsSection.push({
           id: `model-${product.id}-${model}`,
           label: model,
-          subtitle: product.name,
+          subtitle: product.title,
           searchTerm: model,
         });
       }

@@ -129,7 +129,25 @@ export default function MobileSearchOverlay({ open, onClose }) {
 
   const trimmedQuery = debouncedQuery.trim();
   const hasQuery = trimmedQuery.length > 0;
-  const results = hasQuery ? getLiveSearchResults(trimmedQuery) : null;
+  const [results, setResults] = useState(null);
+
+  useEffect(() => {
+    let active = true;
+    if (!hasQuery) {
+      setResults(null);
+      return;
+    }
+
+    async function fetchResults() {
+      const res = await getLiveSearchResults(trimmedQuery);
+      if (active) setResults(res);
+    }
+    fetchResults();
+
+    return () => {
+      active = false;
+    };
+  }, [hasQuery, trimmedQuery]);
   const hasResults =
     results &&
     (results.suggestions.length > 0 ||

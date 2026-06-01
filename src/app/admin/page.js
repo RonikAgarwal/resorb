@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { products } from "@/data/products";
+import { getAllProducts } from "@/lib/products";
 import { categories } from "@/data/categories";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -21,7 +21,10 @@ export default async function AdminDashboard() {
     redirect("/admin/login");
   }
 
-  const { data: rawOrders } = await supabaseAdmin.from('orders').select('*').order('created_at', { ascending: false });
+  const [{ data: rawOrders }, dbProducts] = await Promise.all([
+    supabaseAdmin.from('orders').select('*').order('created_at', { ascending: false }),
+    getAllProducts(),
+  ]);
   const orders = (rawOrders || []).map(order => ({
     ...order,
     customerName: order.customer_name,
@@ -35,7 +38,7 @@ export default async function AdminDashboard() {
   const stats = [
     { label: "Total Orders", value: orders.length.toString(), change: "All time", icon: <PackageIcon className="w-6 h-6 text-blue-600" /> },
     { label: "Revenue", value: `₹${totalRevenue.toLocaleString()}`, change: "All time", icon: <BanknotesIcon className="w-6 h-6 text-green-600" /> },
-    { label: "Products", value: products.length.toString(), change: `${categories.length} categories`, icon: <SettingsSliderIcon className="w-6 h-6 text-purple-600" /> },
+    { label: "Products", value: dbProducts.length.toString(), change: `${categories.length} categories`, icon: <SettingsSliderIcon className="w-6 h-6 text-purple-600" /> },
     { label: "Pending Shipments", value: pendingOrders.toString(), change: "Needs action", icon: <ClockIcon className="w-6 h-6 text-amber-600" /> },
   ];
 
@@ -50,7 +53,7 @@ export default async function AdminDashboard() {
           href="/admin/products/upload"
           className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition-colors"
         >
-          + Upload Products
+          + Upload Product
         </Link>
       </div>
 
@@ -133,7 +136,7 @@ export default async function AdminDashboard() {
             <h2 className="font-semibold text-gray-900 mb-3">Quick Actions</h2>
             <div className="space-y-2">
               {[
-                { label: "Upload products (Excel)", icon: <UploadIcon className="w-4 h-4" />, href: "/admin/products/upload" },
+                { label: "Upload Product", icon: <UploadIcon className="w-4 h-4" />, href: "/admin/products/upload" },
                 { label: "Manage products", icon: <SettingsSliderIcon className="w-4 h-4" />, href: "/admin/products" },
                 { label: "View all orders", icon: <ClipboardIcon className="w-4 h-4" />, href: "/admin/orders" },
                 { label: "Sales report", icon: <ChartPieIcon className="w-4 h-4" />, href: "/admin/reports" },

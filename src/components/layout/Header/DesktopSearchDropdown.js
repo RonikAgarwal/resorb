@@ -110,13 +110,25 @@ export function useDesktopSearchAutocomplete({ query, setQuery, onNavigate }) {
   const trimmedDebounced = debouncedQuery.trim();
   const hasQuery = trimmedDebounced.length > 0;
 
-  const sections = useMemo(
-    () =>
-      hasQuery
-        ? getDesktopAutocompleteSections(trimmedDebounced)
-        : { brands: [], categories: [], products: [], popularSearches: [] },
-    [hasQuery, trimmedDebounced]
-  );
+  const [sections, setSections] = useState({ brands: [], categories: [], products: [], popularSearches: [] });
+
+  useEffect(() => {
+    let active = true;
+    if (!hasQuery) {
+      setSections({ brands: [], categories: [], products: [], popularSearches: [] });
+      return;
+    }
+
+    async function fetchSections() {
+      const result = await getDesktopAutocompleteSections(trimmedDebounced);
+      if (active) setSections(result);
+    }
+    fetchSections();
+
+    return () => {
+      active = false;
+    };
+  }, [hasQuery, trimmedDebounced]);
 
   const flatItems = useMemo(() => {
     if (!open) return [];

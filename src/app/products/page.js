@@ -1,13 +1,15 @@
 import ProductCard from "@/components/product/ProductCard";
-import { getAllProducts } from "@/data/products";
+import { getAllProducts } from "@/lib/products";
 
 export const metadata = {
-  title: "All Products",
+  title: "All Products — RESORB",
   description: "Browse all RESORB replacement remote controls.",
 };
 
-export default function ProductsPage() {
-  const products = getAllProducts();
+export const dynamic = "force-dynamic";
+
+export default async function ProductsPage() {
+  const products = await getAllProducts();
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">

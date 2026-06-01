@@ -1,21 +1,23 @@
 import { Suspense } from "react";
-import { searchProducts } from "@/data/products";
+import { searchProducts } from "@/lib/products";
 import { getCategoryBySlug } from "@/data/categories";
 import { getBrandBySlug } from "@/data/brands";
 import ProductCard from "@/components/product/ProductCard";
 
 export const metadata = {
-  title: "Search Results",
+  title: "Search Results — RESORB",
   description: "Search for replacement remotes by brand, model, or device name.",
 };
+
+export const dynamic = "force-dynamic";
 
 function getParamValue(value) {
   if (Array.isArray(value)) return value[0] || "";
   return value || "";
 }
 
-function SearchResults({ query, category, brand }) {
-  const results = searchProducts(query, { category, brand });
+async function SearchResults({ query, category, brand }) {
+  const results = await searchProducts(query, { category, brand });
   const categoryName = category ? getCategoryBySlug(category)?.name : "";
   const brandName = brand ? getBrandBySlug(brand)?.name : "";
   const scopeLabel = [brandName, categoryName].filter(Boolean).join(" in ");

@@ -21,22 +21,27 @@ const CATEGORY_LABELS = {
   "universal-remotes": "Universal Remote",
 };
 
-function ProductRating({ rating, count }) {
-  return (
-    <div className="flex items-center gap-1 text-xs">
-      <svg className="h-3.5 w-3.5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
-        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-      </svg>
-      <span className="font-semibold text-[#1C2E6B]">{rating.toFixed(1)}</span>
-      <span className="text-gray-500">({count})</span>
-    </div>
-  );
-}
-
 export default function ProductCard({ product }) {
-  const { id, title, price, originalPrice, discount, rating, reviewCount, compatibleBrands = [], inStock, category, popular } = product;
-  const imgSrc = CATEGORY_IMAGES[category] || "/images/remotes/tv.png";
-  const primaryBrand = compatibleBrands[0] || "RESORB";
+  // Support both old hardcoded shape (originalPrice, compatibleBrands)
+  // and new DB shape (mrp, compatible_brands)
+  const id = product.id;
+  const title = product.title;
+  const price = product.price;
+  const originalPrice = product.mrp || product.originalPrice || price;
+  const discount = product.discount || 0;
+  const inStock = product.in_stock !== undefined ? product.in_stock : product.inStock;
+  const category = product.category;
+  const popular = product.popular;
+  const compatibleBrands = product.compatible_brands || product.compatibleBrands || [];
+
+  // Use product-specific images if available, otherwise fallback to category image
+  const hasProductImages = product.images && product.images.length > 0 && product.images[0].startsWith("http");
+  const imgSrc = hasProductImages
+    ? product.images[0]
+    : CATEGORY_IMAGES[category] || "/images/remotes/tv.png";
+  const isExternal = imgSrc.startsWith("http");
+
+  const primaryBrand = compatibleBrands[0] || product.brand || "RESORB";
   const categoryLabel = CATEGORY_LABELS[category] || "Replacement Remote";
   const productTitle = `${primaryBrand} ${categoryLabel}`;
   const compatibilityText =
@@ -64,30 +69,46 @@ export default function ProductCard({ product }) {
       </div>
 
       <div className="relative mx-auto mt-8 h-[118px] w-[76px] flex-shrink-0 overflow-hidden rounded-md bg-white sm:mr-4 sm:mt-7 sm:h-[132px] sm:w-[76px]">
-        <Image
-          src={imgSrc}
-          alt={productTitle}
-          fill
-          sizes="80px"
-          className="scale-[2.05] object-contain transition-transform duration-300 group-hover:scale-[2.16]"
-        />
+        {isExternal ? (
+          <img
+            src={imgSrc}
+            alt={productTitle}
+            className="absolute inset-0 w-full h-full scale-[2.05] object-contain transition-transform duration-300 group-hover:scale-[2.16]"
+          />
+        ) : (
+          <Image
+            src={imgSrc}
+            alt={productTitle}
+            fill
+            sizes="80px"
+            className="scale-[2.05] object-contain transition-transform duration-300 group-hover:scale-[2.16]"
+          />
+        )}
         {!inStock && (
           <div className="absolute inset-0 bg-white/70 flex items-center justify-center">
-            <span className="text-xs font-semibold text-gray-500 bg-gray-100 px-3 py-1 rounded-full">Out of Stock</span>
+            <span className="text-xs font-semibold text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
+              Out of Stock
+            </span>
           </div>
         )}
       </div>
 
       <div className="min-w-0 flex-1 pt-4 text-center sm:pt-7 sm:text-left">
-        <p className="mb-2 line-clamp-2 text-sm font-bold leading-snug text-[#1C2E6B]">{productTitle}</p>
-        <p className="mb-3 line-clamp-2 text-sm leading-relaxed text-gray-600">{compatibilityText}</p>
-
-        <ProductRating rating={rating} count={reviewCount} />
+        <p className="mb-2 line-clamp-2 text-sm font-bold leading-snug text-[#1C2E6B]">
+          {productTitle}
+        </p>
+        <p className="mb-3 line-clamp-2 text-sm leading-relaxed text-gray-600">
+          {compatibilityText}
+        </p>
 
         <div className="mt-4 flex items-baseline gap-2">
-          <span className="text-xl font-bold text-[#1C2E6B]">₹{price.toLocaleString("en-IN")}</span>
+          <span className="text-xl font-bold text-[#1C2E6B]">
+            ₹{price.toLocaleString("en-IN")}
+          </span>
           {originalPrice > price && (
-            <span className="text-xs text-gray-400 line-through">₹{originalPrice.toLocaleString("en-IN")}</span>
+            <span className="text-xs text-gray-400 line-through">
+              ₹{originalPrice.toLocaleString("en-IN")}
+            </span>
           )}
         </div>
       </div>
