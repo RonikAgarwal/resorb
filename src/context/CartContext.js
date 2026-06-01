@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useReducer, useEffect } from "react";
+import { createContext, useContext, useReducer, useEffect, useCallback } from "react";
 
 const CartContext = createContext(null);
 
@@ -77,18 +77,18 @@ export function CartProvider({ children }) {
     0
   );
 
-  function addItem(product) {
+  const addItem = useCallback((product) => {
     dispatch({ type: "ADD_ITEM", product });
-  }
-  function removeItem(id) {
+  }, []);
+  const removeItem = useCallback((id) => {
     dispatch({ type: "REMOVE_ITEM", id });
-  }
-  function updateQty(id, qty) {
+  }, []);
+  const updateQty = useCallback((id, qty) => {
     dispatch({ type: "UPDATE_QTY", id, qty });
-  }
-  function clearCart() {
+  }, []);
+  const clearCart = useCallback(() => {
     dispatch({ type: "CLEAR_CART" });
-  }
+  }, []);
 
   return (
     <CartContext.Provider
