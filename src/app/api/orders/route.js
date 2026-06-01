@@ -54,7 +54,8 @@ export async function POST(request) {
       subtotal: data.subtotal,
       shipping: data.shipping,
       total: data.total,
-      status: "ORDER_CONFIRMED"
+      status: "ORDER_CONFIRMED",
+      razorpay_payment_id: razorpay_payment_id || null,
     };
 
     // Insert into Supabase

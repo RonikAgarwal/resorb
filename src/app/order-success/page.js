@@ -13,9 +13,10 @@ const STAGES = {
 
 function OrderSuccessContent() {
   const searchParams = useSearchParams();
-  const orderId = searchParams.get("id");
   const phone = searchParams.get("phone");
+  const rpayPid = searchParams.get("rpay_pid");
   const [stage, setStage] = useState(STAGES.PROCESSING);
+  const [orderId, setOrderId] = useState(null);
   const { clearCart } = useCart();
 
   useEffect(() => {
@@ -28,6 +29,29 @@ function OrderSuccessContent() {
     const t2 = setTimeout(() => setStage(STAGES.DETAILS), 4500);
     return () => { clearTimeout(t1); clearTimeout(t2); };
   }, [clearCart]);
+
+  // Poll for the order ID once we have a Razorpay payment ID
+  useEffect(() => {
+    if (!rpayPid) return;
+    let cancelled = false;
+
+    async function fetchOrderId() {
+      for (let attempt = 0; attempt < 10; attempt++) {
+        try {
+          const res = await fetch(`/api/orders/by-payment?rpay_pid=${rpayPid}`);
+          const data = await res.json();
+          if (data.success && data.orderId) {
+            if (!cancelled) setOrderId(data.orderId);
+            return;
+          }
+        } catch {}
+        // Wait 1.5s before retrying
+        await new Promise((r) => setTimeout(r, 1500));
+      }
+    }
+    fetchOrderId();
+    return () => { cancelled = true; };
+  }, [rpayPid]);
 
   return (
     <div className="min-h-[85vh] flex items-center justify-center px-4 py-12 bg-gradient-to-b from-gray-50 to-white">

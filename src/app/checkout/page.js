@@ -88,35 +88,30 @@ export default function CheckoutPage() {
         name: "RESORB",
         description: "Replacement Remote Order",
         order_id: data.order.id,
-        handler: async function (response) {
-          try {
-            // 3. Confirm payment and create order in our database
-            const confirmRes = await fetch("/api/orders", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                ...form,
-                items,
-                subtotal: totalPrice,
-                shipping,
-                total: grandTotal,
-                razorpay_payment_id: response.razorpay_payment_id,
-                razorpay_order_id: response.razorpay_order_id,
-                razorpay_signature: response.razorpay_signature,
-              }),
-            });
-            
-            const confirmData = await confirmRes.json();
-            
-            if (confirmData.success) {
-              router.push(`/order-success?id=${confirmData.orderId}&phone=${form.phone}`);
-            } else {
-              alert("Payment verification failed. Please contact support.");
-            }
-          } catch (err) {
-            console.error(err);
-            alert("Error confirming order. Please contact support.");
-          }
+        handler: function (response) {
+          // Redirect instantly so the user sees the processing screen immediately
+          router.push(
+            `/order-success?phone=${form.phone}` +
+            `&rpay_pid=${response.razorpay_payment_id}` +
+            `&rpay_oid=${response.razorpay_order_id}` +
+            `&rpay_sig=${response.razorpay_signature}`
+          );
+
+          // Fire order creation in the background (no await)
+          fetch("/api/orders", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              ...form,
+              items,
+              subtotal: totalPrice,
+              shipping,
+              total: grandTotal,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_signature: response.razorpay_signature,
+            }),
+          }).catch((err) => console.error("Background order creation error:", err));
         },
         prefill: {
           name: form.name,
