@@ -55,6 +55,7 @@ export async function PUT(request, { params }) {
       ...(data.compatible_brands !== undefined && { compatible_brands: data.compatible_brands }),
       ...(data.compatible_models !== undefined && { compatible_models: data.compatible_models }),
       ...(data.tags !== undefined && { tags: data.tags }),
+      ...(data.status !== undefined && { status: data.status }),
       updated_at: new Date().toISOString(),
     };
 

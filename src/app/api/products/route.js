@@ -8,6 +8,7 @@ export async function GET(request) {
     const category = searchParams.get("category");
     const brand = searchParams.get("brand");
     const popular = searchParams.get("popular");
+    const status = searchParams.get("status");
     const q = searchParams.get("q");
 
     let query = supabaseAdmin.from("products").select("*");
@@ -22,6 +23,10 @@ export async function GET(request) {
 
     if (popular === "true") {
       query = query.eq("popular", true);
+    }
+
+    if (status) {
+      query = query.eq("status", status);
     }
 
     if (q && q.trim().length >= 2) {
@@ -114,6 +119,7 @@ export async function POST(request) {
       compatible_brands: data.compatible_brands || [],
       compatible_models: data.compatible_models || [],
       tags: data.tags || [],
+      status: data.status || "draft",
     };
 
     const { error } = await supabaseAdmin.from("products").insert([newProduct]);

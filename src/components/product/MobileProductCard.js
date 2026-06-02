@@ -22,9 +22,21 @@ const CATEGORY_LABELS = {
 };
 
 export default function MobileProductCard({ product }) {
-  const { id, price, originalPrice, discount, rating, reviewCount, compatibleBrands = [], inStock, category, popular } = product;
-  const imgSrc = CATEGORY_IMAGES[category] || "/images/remotes/tv.png";
-  const primaryBrand = compatibleBrands[0] || "RESORB";
+  // Support both old hardcoded shape and new DB shape
+  const id = product.id;
+  const price = product.price;
+  const originalPrice = product.mrp || product.originalPrice || price;
+  const discount = product.discount || 0;
+  const inStock = product.in_stock !== undefined ? product.in_stock : product.inStock;
+  const category = product.category;
+  const popular = product.popular;
+  const compatibleBrands = product.compatible_brands || product.compatibleBrands || [];
+
+  const hasProductImages = product.images && product.images.length > 0 && product.images[0].startsWith("http");
+  const imgSrc = hasProductImages ? product.images[0] : CATEGORY_IMAGES[category] || "/images/remotes/tv.png";
+  const isExternal = imgSrc.startsWith("http");
+
+  const primaryBrand = compatibleBrands[0] || product.brand || "RESORB";
   const categoryLabel = CATEGORY_LABELS[category] || "Replacement Remote";
   const productTitle = `${primaryBrand} ${categoryLabel}`;
 
@@ -48,13 +60,21 @@ export default function MobileProductCard({ product }) {
           )}
         </div>
         <div className="relative mx-auto h-full w-[70px]">
-          <Image
-            src={imgSrc}
-            alt={productTitle}
-            fill
-            sizes="70px"
-            className="object-contain"
-          />
+          {isExternal ? (
+            <img
+              src={imgSrc}
+              alt={productTitle}
+              className="absolute inset-0 w-full h-full object-contain"
+            />
+          ) : (
+            <Image
+              src={imgSrc}
+              alt={productTitle}
+              fill
+              sizes="70px"
+              className="object-contain"
+            />
+          )}
         </div>
         {!inStock && (
           <div className="absolute inset-0 flex items-center justify-center bg-white/70">
@@ -67,14 +87,6 @@ export default function MobileProductCard({ product }) {
 
       <div className="flex flex-1 flex-col p-3 pt-2">
         <p className="line-clamp-2 text-xs font-bold leading-snug text-[#1C2E6B]">{productTitle}</p>
-
-        <div className="mt-1.5 flex items-center gap-1">
-          <svg className="h-3 w-3 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-          </svg>
-          <span className="text-[11px] font-semibold text-[#1C2E6B]">{rating.toFixed(1)}</span>
-          <span className="text-[10px] text-gray-400">({reviewCount})</span>
-        </div>
 
         <div className="mt-auto flex items-baseline gap-1.5 pt-2">
           <span className="text-base font-bold text-[#1C2E6B]">₹{price.toLocaleString("en-IN")}</span>

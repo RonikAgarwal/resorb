@@ -21,6 +21,7 @@ export async function getAllProducts() {
   const { data, error } = await supabaseAdmin
     .from("products")
     .select("*")
+    .neq("status", "archived")
     .order("created_at", { ascending: false });
 
   if (error) {
@@ -38,6 +39,7 @@ export async function getProductsByCategory(categorySlug) {
     .from("products")
     .select("*")
     .eq("category", categorySlug)
+    .neq("status", "archived")
     .order("popular", { ascending: false });
 
   if (error) {
@@ -55,6 +57,7 @@ export async function getPopularProducts(limit = 10) {
     .from("products")
     .select("*")
     .eq("popular", true)
+    .neq("status", "archived")
     .limit(limit);
 
   if (error) {
@@ -73,6 +76,7 @@ export async function getRelatedProducts(product, limit = 4) {
     .select("*")
     .eq("category", product.category)
     .neq("id", product.id)
+    .neq("status", "archived")
     .limit(limit);
 
   if (error) {
@@ -89,7 +93,7 @@ export async function searchProducts(query, { category, brand } = {}) {
   if (!query || query.trim().length < 2) {
     // If no query but filters exist, just return filtered
     if (category || brand) {
-      let q = supabaseAdmin.from("products").select("*");
+      let q = supabaseAdmin.from("products").select("*").neq("status", "archived");
       if (category) q = q.eq("category", category);
       if (brand) q = q.eq("brand", brand);
       const { data } = await q.order("popular", { ascending: false });
@@ -103,7 +107,8 @@ export async function searchProducts(query, { category, brand } = {}) {
   // Fetch all products (Supabase doesn't support OR across text + array fields easily)
   const { data: allProducts, error } = await supabaseAdmin
     .from("products")
-    .select("*");
+    .select("*")
+    .neq("status", "archived");
 
   if (error || !allProducts) return [];
 

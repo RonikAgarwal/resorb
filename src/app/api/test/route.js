@@ -16,11 +16,11 @@ export async function GET() {
 
     return NextResponse.json({
       status: 'success',
-      message: 'Backend is running perfectly!',
+      message: 'Backend is running per!',
       database: 'Supabase connection successful.',
       timestamp: new Date().toISOString()
     });
-    
+
   } catch (err) {
     return NextResponse.json({
       status: 'error',
