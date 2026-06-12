@@ -1,48 +1,9 @@
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import Link from "next/link";
-import ProductCard from "@/components/product/ProductCard";
+import CategoryProductCard from "@/components/product/CategoryProductCard";
 import { getCategoryBySlug } from "@/data/categories";
 import { getProductsByCategory } from "@/lib/products";
 import { getBrandsByCategory } from "@/data/brands";
-
-const CATEGORY_HEROES = {
-  "tv-remotes": {
-    src: "/images/category-heroes/tv-remotes.jpg",
-    width: 3000,
-    height: 600,
-  },
-  "ac-remotes": {
-    src: "/images/category-heroes/ac-remotes.jpg",
-    width: 3000,
-    height: 600,
-  },
-  "set-top-box-remotes": {
-    src: "/images/category-heroes/set-top-box-remotes.jpg",
-    width: 3000,
-    height: 600,
-  },
-  "speaker-remotes": {
-    src: "/images/category-heroes/home-theatre-remotes.jpeg",
-    width: 2560,
-    height: 512,
-  },
-  "streaming-remotes": {
-    src: "/images/category-heroes/streaming-remotes.jpg",
-    width: 3000,
-    height: 600,
-  },
-  "projector-remotes": {
-    src: "/images/category-heroes/projector-remotes.jpg",
-    width: 3000,
-    height: 600,
-  },
-  "universal-remotes": {
-    src: "/images/heroes/universal-remotes.png",
-    width: 1024,
-    height: 204,
-  },
-};
 
 export const dynamic = "force-dynamic";
 
@@ -63,33 +24,13 @@ export default async function CategoryPage({ params }) {
 
   const products = await getProductsByCategory(slug);
   const brands = getBrandsByCategory(slug);
-  const heroImage = CATEGORY_HEROES[slug];
 
   return (
-    <div className="bg-white">
+    <div className="bg-white min-h-screen">
+      <div className="max-w-7xl mx-auto px-4 pt-6 pb-12">
 
-      {/* ── Hero Banner ── */}
-      {heroImage && (
-        <div className="w-full bg-white">
-          <div className="w-full max-w-[1800px] mx-auto">
-            <Image
-              src={heroImage.src}
-              alt={`${category.name} — RESORB`}
-              width={heroImage.width}
-              height={heroImage.height}
-              unoptimized
-              priority
-              sizes="100vw"
-              className="block h-auto w-full"
-            />
-          </div>
-        </div>
-      )}
-
-      <div className="max-w-7xl mx-auto px-4 py-6">
-
-        {/* Breadcrumb */}
-        <nav className="text-xs text-gray-400 mb-4 flex items-center gap-1.5" aria-label="Breadcrumb">
+        {/* ── Section 1: Breadcrumb ── */}
+        <nav className="text-xs text-gray-400 mb-5 flex items-center gap-1.5" aria-label="Breadcrumb">
           <Link href="/" className="hover:text-[#1C2E6B] transition-colors">Home</Link>
           <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" d="m9 18 6-6-6-6"/>
@@ -97,40 +38,37 @@ export default async function CategoryPage({ params }) {
           <span className="text-gray-700 font-medium">{category.name}</span>
         </nav>
 
-        {/* Category header */}
-        <div className="mb-6">
-          <h1 className="text-2xl font-bold" style={{ color: '#1C2E6B' }}>{category.name}</h1>
-          <p className="text-sm text-gray-500 mt-1">{category.description}</p>
-        </div>
+        {/* ── Section 2: Category Heading ── */}
+        <h1 className="category-heading mb-6">{category.name}</h1>
 
-        {/* Brand filter pills */}
+        {/* ── Section 3: Brand Filter Pills ── */}
         {brands.length > 0 && (
-          <div className="mb-6">
-            <p className="text-[10px] text-gray-400 mb-2 font-bold uppercase tracking-widest">Filter by brand</p>
-            <div className="flex flex-wrap gap-2">
-              {brands.map((brand) => (
-                <Link
-                  key={brand.id}
-                  href={`/search?q=${encodeURIComponent(brand.name)}&category=${slug}`}
-                  className="text-xs font-medium text-gray-600 bg-white border border-gray-200 hover:border-[#009B9B] hover:text-[#1C2E6B] px-3 py-1.5 rounded-full transition-all"
-                >
-                  {brand.name}
-                </Link>
-              ))}
-            </div>
+          <div className="brand-pills-row mb-8">
+            <Link
+              href={`/category/${slug}`}
+              className="brand-pill brand-pill-active"
+            >
+              All Brands
+            </Link>
+            {brands.map((brand) => (
+              <Link
+                key={brand.id}
+                href={`/search?q=${encodeURIComponent(brand.name)}&category=${slug}`}
+                className="brand-pill"
+              >
+                {brand.name}
+              </Link>
+            ))}
           </div>
         )}
 
-        {/* Products grid */}
+        {/* ── Section 4: Product Grid ── */}
         {products.length > 0 ? (
-          <>
-            <p className="text-sm text-gray-400 mb-4">{products.length} products found</p>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-              {products.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
-          </>
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-5">
+            {products.map((product, idx) => (
+              <CategoryProductCard key={product.id} product={product} index={idx} />
+            ))}
+          </div>
         ) : (
           <div className="text-center py-16">
             <svg className="w-12 h-12 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" strokeWidth={1.2} viewBox="0 0 24 24">
