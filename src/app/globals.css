@@ -272,6 +272,8 @@ body {
   background: #1C2E6B;
   color: #ffffff;
   border-color: #1C2E6B;
+  box-shadow: 0 4px 12px rgba(28, 46, 107, 0.22);
+  font-weight: 600;
 }
 .brand-pill-active:hover {
   background: #162352;
@@ -286,8 +288,9 @@ body {
   flex-direction: column;
   overflow: hidden;
   border-radius: 1rem;
-  border: 1.5px solid #e8eaee;
+  border: 1px solid #f3f4f6;
   background: #ffffff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
   transition: box-shadow 260ms cubic-bezier(0.16, 1, 0.3, 1),
               border-color 200ms ease,
               transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -295,8 +298,8 @@ body {
   color: inherit;
 }
 .cat-card:hover {
-  border-color: #CFE6EA;
-  box-shadow: 0 8px 32px rgba(28, 46, 107, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+  border-color: #e5e7eb;
+  box-shadow: 0 12px 32px rgba(28, 46, 107, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04);
   transform: translateY(-2px);
 }
 
@@ -304,7 +307,7 @@ body {
 .cat-card-image-wrap {
   position: relative;
   background: #F8FAFA;
-  padding: 1rem 1rem 0.75rem;
+  padding: 0.75rem 0.75rem 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -312,8 +315,8 @@ body {
 }
 .cat-card-image-inner {
   position: relative;
-  width: 100px;
-  height: 160px;
+  width: 120px;
+  height: 190px;
   flex-shrink: 0;
 }
 .cat-card-image-inner img,
@@ -356,33 +359,6 @@ body {
   background: #1C2E6B;
   border-radius: 0.375rem;
   letter-spacing: 0.02em;
-}
-
-/* Wishlist icon */
-.cat-card-wishlist {
-  position: absolute;
-  right: 0.75rem;
-  top: 0.75rem;
-  z-index: 10;
-  width: 2rem;
-  height: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.85);
-  border: none;
-  cursor: pointer;
-  transition: background 150ms ease, transform 150ms ease;
-  color: #9ca3af;
-}
-.cat-card-wishlist:hover {
-  background: #ffffff;
-  transform: scale(1.1);
-  color: #ef4444;
-}
-.cat-card-wishlist-active {
-  color: #ef4444;
 }
 
 /* Out of stock overlay */
@@ -462,7 +438,7 @@ body {
   justify-content: center;
   gap: 0.5rem;
   width: 100%;
-  padding: 0.6875rem 1rem;
+  padding: 0.5rem 1rem;
   margin-top: 0.75rem;
   font-size: 0.8125rem;
   font-weight: 600;

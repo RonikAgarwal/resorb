@@ -13,18 +13,18 @@ const QUICK_SEARCHES = [
 
 const HERO_TRUST_ITEMS = [
   {
-    title: "Verified Compatibility",
-    text: "10,000+ models",
+    title: "10,000+ Compatible Models",
+    text: "Verified database",
     icon: "shield",
   },
   {
-    title: "Plug & Play",
-    text: "Easy setup",
+    title: "Premium Quality Products",
+    text: "Durable & reliable",
     icon: "plug",
   },
   {
-    title: "30-Day Replacement",
-    text: "Hassle-free returns",
+    title: "Tested Before Dispatch",
+    text: "Quality assured",
     icon: "refresh",
   },
   {
@@ -105,18 +105,7 @@ function DesktopCompatibilityHero() {
             </div>
           </form>
 
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs font-bold text-white">Popular Searches:</span>
-            {QUICK_SEARCHES.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                className="rounded-full border border-white/35 bg-[#080f23]/30 px-4 py-1.5 text-xs font-semibold text-white shadow-sm backdrop-blur-sm hover:border-[#14C7B8] hover:text-[#14C7B8] transition-colors"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </div>
+
         </div>
 
         <div className="mt-auto grid w-full max-w-[880px] -translate-x-3 grid-cols-2 gap-4 text-white md:grid-cols-4 md:gap-0">

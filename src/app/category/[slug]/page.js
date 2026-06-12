@@ -25,6 +25,14 @@ export default async function CategoryPage({ params }) {
   const products = await getProductsByCategory(slug);
   const brands = getBrandsByCategory(slug);
 
+  // Construct subtle descriptive line
+  const brandNames = brands.map(b => b.name);
+  let descriptionText = category.description;
+  if (brandNames.length > 0) {
+    const topBrands = brandNames.slice(0, 5).join(", ");
+    descriptionText = `Find compatible replacement remotes for ${topBrands}${brandNames.length > 5 ? " and more" : ""}.`;
+  }
+
   return (
     <div className="bg-white min-h-screen">
       <div className="max-w-7xl mx-auto px-4 pt-6 pb-12">
@@ -39,7 +47,10 @@ export default async function CategoryPage({ params }) {
         </nav>
 
         {/* ── Section 2: Category Heading ── */}
-        <h1 className="category-heading mb-6">{category.name}</h1>
+        <div className="mb-6">
+          <h1 className="category-heading">{category.name}</h1>
+          <p className="text-sm text-gray-500 mt-2">{descriptionText}</p>
+        </div>
 
         {/* ── Section 3: Brand Filter Pills ── */}
         {brands.length > 0 && (

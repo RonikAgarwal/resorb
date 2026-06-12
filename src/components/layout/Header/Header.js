@@ -210,7 +210,7 @@ export default function Header() {
     <header className="sticky top-0 z-50 bg-white lg:shadow-sm">
       {/* Announcement bar — desktop only */}
       <div className="hidden text-white text-xs py-1.5 text-center font-medium lg:block" style={{ background: '#1C2E6B' }}>
-        Free Shipping above ₹499 &nbsp;·&nbsp; 30-Day Replacement Warranty &nbsp;·&nbsp; WhatsApp: +91 98765 43210
+        Free Shipping above ₹499 &nbsp;·&nbsp; WhatsApp: +91 98765 43210
       </div>
 
       {/* Mobile header */}

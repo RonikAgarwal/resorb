@@ -1,9 +1,10 @@
 import CompatibilityHero from "@/components/home/CompatibilityHero";
-import FeaturedProducts from "@/components/home/FeaturedProducts";
 import DeviceTypeSection from "@/components/home/DeviceTypeSection";
 import WhatsAppHelpSection from "@/components/home/WhatsAppHelpSection";
 import VideoSection from "@/components/home/VideoSection";
-import { getPopularProducts } from "@/lib/products";
+import BulkOrdersSection from "@/components/home/BulkOrdersSection";
+import VideoMarketplaceSection from "@/components/home/VideoMarketplaceSection";
+import UspStrip from "@/components/home/UspStrip";
 
 export const metadata = {
   title: "RESORB — India's Trusted Replacement Remote Control Store",
@@ -14,17 +15,27 @@ export const metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  const featuredProducts = await getPopularProducts(10);
-
   return (
     <div className="bg-white">
       <CompatibilityHero />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 lg:px-4">
         <DeviceTypeSection />
-        <FeaturedProducts products={featuredProducts} />
+
+        {/* Mobile-only sections preserved */}
         <WhatsAppHelpSection />
-        <VideoSection />
+        <div className="lg:hidden">
+          <VideoSection />
+        </div>
+
+        {/* Desktop: Bulk Orders + Can't Find (side by side) */}
+        <BulkOrdersSection />
+
+        {/* Desktop: Video + Marketplace (side by side) */}
+        <VideoMarketplaceSection />
+
+        {/* Desktop: USP Strip */}
+        <UspStrip />
       </div>
     </div>
   );
