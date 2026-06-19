@@ -23,7 +23,7 @@ export default async function ProductsPage() {
           </p>
         </div>
         <a
-          href="https://wa.me/919876543210?text=Hi%2C%20I%20need%20help%20finding%20a%20replacement%20remote."
+          href="https://wa.me/917011779887?text=Hi%2C%20I%20need%20help%20finding%20a%20replacement%20remote."
           target="_blank"
           rel="noopener noreferrer"
           className="hidden sm:inline-flex items-center gap-2 rounded-lg bg-green-500 px-4 py-2 text-xs font-semibold text-white hover:bg-green-600 transition-colors"

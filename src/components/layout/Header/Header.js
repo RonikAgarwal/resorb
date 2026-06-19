@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import ResorbWordmark from "@/components/ui/ResorbWordmark";
 import { useCart } from "@/context/CartContext";
 import { categories } from "@/data/categories";
-import { SearchIcon, FilterIcon, ChevronDownIcon, CloseIcon, CartIcon, TruckIcon, MenuIcon } from "@/components/icons";
+import { SearchIcon, FilterIcon, ChevronDownIcon, CloseIcon, CartIcon, TruckIcon, MenuIcon, WhatsAppIcon } from "@/components/icons";
 import NavItem from "./NavItem";
 import FilterPanel from "./FilterPanel";
 import MobileSearchOverlay from "./MobileSearchOverlay";
@@ -14,22 +14,22 @@ import DesktopSearchDropdown, { useDesktopSearchAutocomplete } from "./DesktopSe
 
 const NAV_ITEMS = [
   {
-    label: "AC Remotes",
-    href: "/category/ac-remotes",
-    featured: ["Daikin", "Voltas", "Blue Star", "Hitachi", "Carrier", "Lloyd"],
-    others: ["Azure", "Electrolux", "Godrej", "Gree", "Haier", "IFB", "Kelvinator", "LG", "Mitsubishi", "O General", "Onida", "Panasonic", "Samsung", "Whirlpool"],
-  },
-  {
     label: "LED TV Remotes",
     href: "/category/tv-remotes",
     featured: ["Samsung", "LG", "Sony", "Mi / Xiaomi", "Panasonic", "TCL"],
     others: ["BPL", "Haier", "Hisense", "Intex", "Kodak", "MarQ", "OnePlus", "Realme", "Sanyo", "Thomson", "VU", "Videocon"],
   },
   {
-    label: "Set-Top Box",
+    label: "AC Remotes",
+    href: "/category/ac-remotes",
+    featured: ["Daikin", "Voltas", "Blue Star", "Hitachi", "Carrier", "Lloyd"],
+    others: ["Azure", "Electrolux", "Godrej", "Gree", "Haier", "IFB", "Kelvinator", "LG", "Mitsubishi", "O General", "Onida", "Panasonic", "Samsung", "Whirlpool"],
+  },
+  {
+    label: "Set-Top Box & Streaming",
     href: "/category/set-top-box-remotes",
-    featured: ["Tata Play", "Airtel Xstream", "Dish TV", "Jio", "Sun Direct", "Videocon D2H"],
-    others: ["DD Free Dish", "Den Networks", "Hathway", "NXT Digital", "SITI Cable"],
+    featured: ["Tata Play", "Airtel Xstream", "Dish TV", "Amazon Fire TV", "Apple TV", "Videocon D2H"],
+    others: ["DD Free Dish", "Den Networks", "Hathway", "Jio", "Mi Box", "NXT Digital", "SITI Cable", "Sun Direct"],
   },
   {
     label: "Home Theatre",
@@ -38,22 +38,16 @@ const NAV_ITEMS = [
     others: ["Bose", "Denon", "Harman", "Intex", "Onkyo", "Panasonic", "Yamaha", "Zebronics"],
   },
   {
-    label: "Streaming",
-    href: "/category/streaming-remotes",
-    featured: ["Amazon Fire TV", "Mi Box", "Google Chromecast", "Apple TV", "Roku", "Nvidia Shield"],
-    others: ["Airtel Xstream Box", "JioFiber", "Tata Play Binge", "Xiaomi Mi Stick"],
-  },
-  {
     label: "Projector",
     href: "/category/projector-remotes",
     featured: ["Epson", "BenQ", "ViewSonic", "Optoma", "Sony", "LG"],
     others: ["Acer", "Canon", "Dell", "Infocus", "NEC", "Panasonic", "Sharp"],
   },
   {
-    label: "Universal",
-    href: "/category/universal-remotes",
-    featured: ["RESORB UNI 88", "RESORB UNI 120", "8-in-1 Smart Remote", "Multi-brand TV", "Multi-brand AC", "Voice Remote"],
-    others: [],
+    label: "Fan Remotes",
+    href: "/category/fan-remotes",
+    featured: ["Atomberg", "Crompton", "Orient", "Havells", "Luminous", "Polycab"],
+    others: ["Bajaj", "Usha", "V-Guard", "Surya", "Halonix"],
   },
 ];
 
@@ -209,8 +203,12 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 bg-white lg:shadow-sm">
       {/* Announcement bar — desktop only */}
-      <div className="hidden text-white text-xs py-1.5 text-center font-medium lg:block" style={{ background: '#1C2E6B' }}>
-        Free Shipping above ₹499 &nbsp;·&nbsp; WhatsApp: +91 98765 43210
+      <div className="hidden text-white text-xs py-2 text-center font-medium lg:flex items-center justify-center gap-2 tracking-wide" style={{ background: '#0F2249' }}>
+        <TruckIcon className="w-4 h-4" />
+        <span>Free Shipping above ₹499</span>
+        <span className="mx-2 opacity-50">·</span>
+        <WhatsAppIcon className="w-4 h-4" />
+        <span>WhatsApp: +91 70117 79887</span>
       </div>
 
       {/* Mobile header */}
@@ -279,7 +277,7 @@ export default function Header() {
         <div ref={searchRef} className="relative order-3 w-full flex-1 max-w-3xl lg:order-none lg:w-auto">
           <form
             onSubmit={handleSearch}
-            className="h-12 flex items-center rounded-xl overflow-hidden border border-gray-200 bg-white shadow-sm focus-within:border-[#009B9B] focus-within:ring-2 focus-within:ring-[#009B9B]/10 transition-colors"
+            className="h-[52px] flex items-center rounded-xl border border-gray-200 bg-white shadow-sm focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-500/20 transition-all"
           >
             <button
               type="button"
@@ -287,21 +285,21 @@ export default function Header() {
                 setFilterOpen((v) => !v);
                 desktopSearch.setOpen(false);
               }}
-              className={`h-full flex items-center gap-1.5 px-3 text-xs font-semibold border-r border-gray-100 transition-colors ${
+              className={`h-full flex items-center gap-2 px-4 text-sm font-medium border-r border-gray-100 transition-colors rounded-l-xl ${
                 hasFilter
-                  ? "bg-[#E0EEF0] text-[#1C2E6B]"
-                  : "text-gray-600 hover:bg-gray-50 hover:text-[#1C2E6B]"
+                  ? "bg-blue-50 text-blue-700"
+                  : "text-gray-700 hover:bg-gray-50 hover:text-[#0F2249]"
               }`}
               aria-expanded={filterOpen}
               aria-label="Filter search"
             >
               <FilterIcon className="w-4 h-4 flex-shrink-0" />
-              <span className="max-w-[92px] truncate">{filterLabel}</span>
+              <span className="max-w-[100px] truncate">{filterLabel}</span>
               <ChevronDownIcon className={`w-3 h-3 flex-shrink-0 transition-transform ${filterOpen ? "rotate-180" : ""}`} />
             </button>
 
-            <div className="px-3 text-[#009B9B] flex-shrink-0">
-              <SearchIcon className="w-4.5 h-4.5" />
+            <div className="pl-4 pr-2 text-gray-400 flex-shrink-0">
+              <SearchIcon className="w-5 h-5" />
             </div>
 
             <input
@@ -314,7 +312,7 @@ export default function Header() {
               onFocus={() => desktopSearch.setOpen(true)}
               onKeyDown={desktopSearch.handleInputKeyDown}
               placeholder="Search model number, brand or remote code..."
-              className="min-w-0 flex-1 h-full pr-3 text-base text-gray-800 outline-none placeholder-gray-400 bg-white"
+              className="min-w-0 flex-1 h-full text-base text-gray-900 outline-none placeholder-gray-400 bg-transparent"
               aria-label="Search products"
               aria-expanded={desktopSearch.showDropdown}
               aria-controls="desktop-search-suggestions"
@@ -335,8 +333,8 @@ export default function Header() {
 
             <button
               type="submit"
-              className="h-full px-5 sm:px-6 text-white flex-shrink-0 hover:opacity-95 transition-opacity font-semibold text-sm"
-              style={{ background: '#1C2E6B' }}
+              className="m-1.5 h-[40px] px-8 rounded-lg text-white flex-shrink-0 hover:bg-[#0a142c] transition-colors font-medium text-sm flex items-center justify-center"
+              style={{ background: '#0F2249' }}
               aria-label="Search"
             >
               <span className="hidden sm:inline">Find</span>
@@ -390,11 +388,11 @@ export default function Header() {
       </div>
 
       {/* Category nav — desktop only */}
-      <div className="hidden border-t border-gray-100 lg:block">
-        <nav className="max-w-7xl mx-auto px-4 flex items-center" aria-label="Product categories">
+      <div className="hidden border-t border-gray-100 lg:block bg-white">
+        <nav className="max-w-7xl mx-auto px-4 flex items-center gap-8" aria-label="Product categories">
           <Link
             href="/"
-            className="text-sm font-medium px-3 py-3 whitespace-nowrap border-b-2 border-transparent text-gray-600 hover:text-[#1C2E6B] hover:border-gray-300 transition-colors"
+            className="text-sm font-medium py-3.5 whitespace-nowrap border-b-2 border-blue-600 text-[#0F2249] transition-colors"
           >
             Home
           </Link>

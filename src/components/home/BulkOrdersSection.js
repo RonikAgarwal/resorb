@@ -1,18 +1,50 @@
 import { WhatsAppIcon } from "@/components/icons";
 
-const WHATSAPP_URL =
-  "https://wa.me/919876543210?text=Hi%2C%20I%20need%20bulk%20pricing%20for%20replacement%20remotes.";
+const BULK_WHATSAPP_URL =
+  "https://wa.me/917011779887?text=Hi%2C%20I%20need%20bulk%20pricing%20for%20replacement%20remotes.";
+const FIND_REMOTE_WHATSAPP_URL =
+  "https://wa.me/917011779887?text=Hi%2C%20I%20need%20help%20finding%20the%20right%20replacement%20remote.%20I%20can%20share%20a%20photo.";
 
 export default function BulkOrdersSection() {
   return (
-    <section className="hidden lg:block py-8" aria-labelledby="bulk-orders-heading">
-      <div className="flex gap-6">
+    <section className="hidden lg:block py-6" aria-labelledby="find-remote-heading bulk-orders-heading">
+      <div className="grid grid-cols-2 items-stretch gap-6">
+        {/* Can't Find Your Remote Card */}
+        <div className="group min-h-[260px] rounded-2xl bg-gray-50 p-8 transition-colors hover:bg-gray-100 border border-gray-100">
+          <div className="flex h-full items-center gap-6">
+            <div className="flex-shrink-0">
+              <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white text-gray-700 shadow-sm">
+                <svg className="h-8 w-8" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                </svg>
+              </div>
+            </div>
+            <div className="min-w-0">
+              <h2 id="find-remote-heading" className="text-2xl font-bold leading-tight text-gray-900">
+                Can&apos;t Find Your Remote?
+              </h2>
+              <p className="mt-2 text-sm leading-relaxed text-gray-600">
+                Send us a photo of your remote on WhatsApp and we&apos;ll help you find the perfect match.
+              </p>
+              <a
+                href={FIND_REMOTE_WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-6 inline-flex items-center gap-2 rounded-full bg-green-600 px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-green-700"
+              >
+                <WhatsAppIcon className="h-4 w-4" />
+                Chat on WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+
         {/* Bulk Orders Card */}
-        <div className="flex-1 rounded-2xl border border-gray-100 bg-white p-8 shadow-sm">
-          <div className="flex items-start gap-6">
+        <div className="group min-h-[260px] rounded-2xl bg-gray-50 p-8 transition-colors hover:bg-gray-100 border border-gray-100">
+          <div className="grid h-full grid-cols-[auto_minmax(0,1fr)_minmax(190px,auto)] items-center gap-6">
             {/* Icon */}
             <div className="flex-shrink-0">
-              <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#F4FAFA] text-[#1C2E6B]">
+              <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white text-gray-700 shadow-sm">
                 <svg className="h-8 w-8" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" />
                 </svg>
@@ -20,15 +52,14 @@ export default function BulkOrdersSection() {
             </div>
 
             {/* Content */}
-            <div className="flex-1">
-              <h2 id="bulk-orders-heading" className="text-xl font-bold text-[#1C2E6B]">
+            <div className="min-w-0 border-r border-gray-200 pr-6">
+              <h2 id="bulk-orders-heading" className="text-2xl font-bold leading-tight text-gray-900">
                 Need Bulk Quantities?
               </h2>
-              <p className="mt-2 text-sm text-gray-500">Remote requirements for:</p>
-              <ul className="mt-2 space-y-1">
+              <ul className="mt-3 grid grid-cols-2 gap-y-1.5 gap-x-2">
                 {["Dealers", "Service Centers", "Retail Stores", "Corporate Orders"].map((item) => (
-                  <li key={item} className="flex items-center gap-2 text-sm text-gray-700">
-                    <svg className="h-4 w-4 flex-shrink-0 text-[#009B9B]" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+                  <li key={item} className="flex items-center gap-2 text-sm text-gray-600">
+                    <svg className="h-4 w-4 flex-shrink-0 text-blue-600" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                     </svg>
                     {item}
@@ -37,52 +68,16 @@ export default function BulkOrdersSection() {
               </ul>
             </div>
 
-            {/* WhatsApp side */}
-            <div className="flex flex-col items-end gap-3 flex-shrink-0">
-              <div className="flex items-center gap-2">
-                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0FA561]/10 text-[#0FA561]">
-                  <WhatsAppIcon className="h-4 w-4" />
-                </div>
-                <div>
-                  <p className="text-xs font-semibold text-gray-500">WhatsApp Us</p>
-                  <p className="text-sm font-bold text-[#1C2E6B]">+91 98765 43210</p>
-                </div>
-              </div>
+            {/* CTA side */}
+            <div className="flex min-w-0 flex-col justify-center pl-2">
+              <div className="mb-4 text-sm font-semibold text-gray-900">Get a quick quote</div>
               <a
-                href={WHATSAPP_URL}
+                href={BULK_WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-lg bg-[#1C2E6B] px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#162352]"
+                className="inline-flex w-full items-center justify-center rounded-full bg-blue-600 px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-blue-700"
               >
-                Get Bulk Pricing
-              </a>
-            </div>
-          </div>
-        </div>
-
-        {/* Can't Find Your Remote Card */}
-        <div className="w-[340px] flex-shrink-0 rounded-2xl border border-gray-100 bg-white p-8 shadow-sm">
-          <div className="flex items-start gap-4">
-            <div className="flex-shrink-0">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#F4FAFA] text-[#1C2E6B]">
-                <svg className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                </svg>
-              </div>
-            </div>
-            <div>
-              <h3 className="text-lg font-bold text-[#1C2E6B]">Can&apos;t Find Your Remote?</h3>
-              <p className="mt-2 text-sm leading-relaxed text-gray-500">
-                Send us a photo of your remote on WhatsApp and we&apos;ll help you find the perfect match.
-              </p>
-              <a
-                href="https://wa.me/919876543210?text=Hi%2C%20I%20need%20help%20finding%20the%20right%20replacement%20remote.%20I%20can%20share%20a%20photo."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-4 inline-flex items-center gap-2 rounded-lg bg-[#0FA561] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#0C8C52]"
-              >
-                <WhatsAppIcon className="h-4 w-4" />
-                Chat on WhatsApp
+                Request Pricing
               </a>
             </div>
           </div>

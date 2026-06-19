@@ -322,7 +322,7 @@ export default async function ProductPage({ params }) {
               confirm compatibility before you order.
             </p>
             <a
-              href={`https://wa.me/919876543210?text=Hi%2C%20I%20need%20help%20with%20${encodeURIComponent(product.title)}.%20Is%20it%20compatible%20with%20my%20device%3F`}
+              href={`https://wa.me/917011779887?text=Hi%2C%20I%20need%20help%20with%20${encodeURIComponent(product.title)}.%20Is%20it%20compatible%20with%20my%20device%3F`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-semibold px-5 py-2.5 rounded-xl transition-colors text-sm"

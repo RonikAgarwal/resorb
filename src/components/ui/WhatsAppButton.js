@@ -3,7 +3,7 @@
 export default function WhatsAppButton() {
   function handleClick() {
     window.open(
-      "https://wa.me/919876543210?text=Hi%2C%20I%20need%20help%20finding%20a%20replacement%20remote%20for%20my%20device.",
+      "https://wa.me/917011779887?text=Hi%2C%20I%20need%20help%20finding%20a%20replacement%20remote%20for%20my%20device.",
       "_blank",
       "noopener,noreferrer"
     );

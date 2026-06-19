@@ -18,7 +18,7 @@ const INFO_LINKS = [
 ];
 
 const WHATSAPP_URL =
-  "https://wa.me/919876543210?text=Hi%2C%20I%20need%20help%20finding%20the%20right%20replacement%20remote.%20I%20can%20share%20a%20photo.";
+  "https://wa.me/917011779887?text=Hi%2C%20I%20need%20help%20finding%20the%20right%20replacement%20remote.%20I%20can%20share%20a%20photo.";
 
 function InstagramIcon() {
   return (
@@ -37,9 +37,9 @@ function EmailIcon() {
   );
 }
 
-function FooterHeading({ children }) {
+function FooterHeading({ children, tone = "light" }) {
   return (
-    <h3 className="text-[13px] font-bold uppercase tracking-wider text-white">
+    <h3 className={`font-bold uppercase ${tone === "dark" ? "text-[13px] text-[#1C2E6B]" : "text-[12px] text-white"}`}>
       {children}
     </h3>
   );
@@ -47,37 +47,40 @@ function FooterHeading({ children }) {
 
 export default function Footer() {
   return (
-    <footer className="text-slate-300">
+    <footer>
       {/* Main footer — desktop */}
-      <section className="hidden lg:block bg-[#1C2E6B]">
+      <section className="hidden border-y border-gray-100 bg-white lg:block">
         <div className="mx-auto max-w-7xl px-4 py-10">
-          <div className="grid grid-cols-4 gap-8">
+          <div className="grid grid-cols-[1.16fr_0.78fr_0.78fr_1.05fr] items-start gap-10">
             {/* Column 1 — Brand */}
             <div>
-              <div className="mb-3">
-                <ResorbWordmark size="sm" light={true} />
+              <div className="mb-4">
+                <ResorbWordmark size="sm" />
               </div>
-              <p className="text-[13.5px] leading-relaxed text-slate-300">
+              <p className="max-w-[250px] text-[14px] leading-relaxed text-gray-600">
                 India&apos;s trusted replacement remote store.
               </p>
+              <p className="mt-2 max-w-[250px] text-[13px] leading-relaxed text-gray-500">
+                Verified compatibility across 10,000+ device models.
+              </p>
 
-              <div className="mt-4 flex items-center gap-2">
-                <div className="flex h-6 w-6 items-center justify-center rounded-full bg-[#009B9B]/20 text-[#20D6C7]">
-                  <WhatsAppIcon className="h-3.5 w-3.5" />
+              <div className="mt-5 flex items-center gap-3">
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#009B9B]/10 text-[#009B9B]">
+                  <WhatsAppIcon className="h-4 w-4" />
                 </div>
                 <a
-                  href="tel:+919876543210"
-                  className="text-sm font-semibold text-[#20D6C7] transition-colors hover:text-white"
+                  href="tel:+917011779887"
+                  className="text-[15px] font-bold text-[#009B9B] transition-colors hover:text-[#1C2E6B]"
                 >
-                  +91 98765 43210
+                  +91 70117 79887
                 </a>
               </div>
 
-              <div className="mt-4 flex items-center gap-2.5">
-                <a href="#" className="flex h-8 w-8 items-center justify-center rounded-full bg-white/5 text-slate-400 transition-colors hover:bg-white/10 hover:text-white" aria-label="Instagram">
+              <div className="mt-5 flex items-center gap-3">
+                <a href="#" className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-[#1C2E6B] transition-colors hover:border-[#009B9B] hover:bg-[#F8FBFC] hover:text-[#009B9B]" aria-label="Instagram">
                   <InstagramIcon />
                 </a>
-                <a href="mailto:support@resorb.in" className="flex h-8 w-8 items-center justify-center rounded-full bg-white/5 text-slate-400 transition-colors hover:bg-white/10 hover:text-white" aria-label="Email">
+                <a href="mailto:support@resorb.in" className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-[#1C2E6B] transition-colors hover:border-[#009B9B] hover:bg-[#F8FBFC] hover:text-[#009B9B]" aria-label="Email">
                   <EmailIcon />
                 </a>
               </div>
@@ -85,11 +88,11 @@ export default function Footer() {
 
             {/* Column 2 — Support */}
             <div>
-              <FooterHeading>Support</FooterHeading>
-              <ul className="mt-4 space-y-2">
+              <FooterHeading tone="dark">Support</FooterHeading>
+              <ul className="mt-5 space-y-3">
                 {SUPPORT_LINKS.map((item) => (
                   <li key={item.href}>
-                    <Link href={item.href} className="text-[13.5px] text-slate-400 transition-colors hover:text-white">
+                    <Link href={item.href} className="text-[14px] text-gray-500 transition-colors hover:text-[#1C2E6B]">
                       {item.name}
                     </Link>
                   </li>
@@ -99,11 +102,11 @@ export default function Footer() {
 
             {/* Column 3 — Information */}
             <div>
-              <FooterHeading>Information</FooterHeading>
-              <ul className="mt-4 space-y-2">
+              <FooterHeading tone="dark">Information</FooterHeading>
+              <ul className="mt-5 space-y-3">
                 {INFO_LINKS.map((item) => (
                   <li key={item.href}>
-                    <Link href={item.href} className="text-[13.5px] text-slate-400 transition-colors hover:text-white">
+                    <Link href={item.href} className="text-[14px] text-gray-500 transition-colors hover:text-[#1C2E6B]">
                       {item.name}
                     </Link>
                   </li>
@@ -113,47 +116,40 @@ export default function Footer() {
 
             {/* Column 4 — WhatsApp CTA */}
             <div>
-              <div className="rounded-xl border border-white/10 bg-black/15 p-5 relative overflow-hidden shadow-sm">
-                <div className="absolute top-0 right-0 p-4 pointer-events-none opacity-20">
-                  <svg width="80" height="80" fill="none" viewBox="0 0 100 100">
-                    <pattern id="footer-dots" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
-                      <circle cx="2" cy="2" r="1.5" fill="#20D6C7" />
-                    </pattern>
-                    <rect x="0" y="0" width="100" height="100" fill="url(#footer-dots)" />
-                  </svg>
+              <div className="rounded-2xl border border-gray-200 bg-[#F8FBFC] p-6 shadow-[0_12px_30px_rgba(28,46,107,0.06)]">
+                <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-full bg-[#0FA561]/10 text-[#0FA561]">
+                  <WhatsAppIcon className="h-5 w-5" />
                 </div>
-                <div className="relative z-10">
-                  <h3 className="text-[16px] font-bold leading-snug text-white">
-                    Need help finding<br/>the right remote?
-                  </h3>
-                  <p className="mt-2 text-[13px] leading-relaxed text-slate-400 pr-2">
-                    Send us a photo on WhatsApp and we&apos;ll help you find the perfect match.
-                  </p>
-                  <a
-                    href={WHATSAPP_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-4 inline-flex items-center justify-center gap-2 rounded-lg bg-[#0FA561] px-4 py-2 text-[13.5px] font-semibold text-white transition-colors hover:bg-[#0C8C52]"
-                  >
-                    <WhatsAppIcon className="h-4 w-4" />
-                    Chat on WhatsApp
-                  </a>
-                </div>
+                <h3 className="text-lg font-bold leading-snug text-[#1C2E6B]">
+                  Need help finding the right remote?
+                </h3>
+                <p className="mt-3 text-[13.5px] leading-relaxed text-gray-500">
+                  Send us a photo on WhatsApp and we&apos;ll help you find the perfect match.
+                </p>
+                <a
+                  href={WHATSAPP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-6 inline-flex items-center justify-center gap-2 rounded-lg bg-[#0FA561] px-5 py-3 text-sm font-semibold text-white shadow-[0_8px_18px_rgba(15,165,97,0.18)] transition-colors hover:bg-[#0C8C52]"
+                >
+                  <WhatsAppIcon className="h-4 w-4" />
+                  Chat on WhatsApp
+                </a>
               </div>
             </div>
           </div>
         </div>
 
         {/* Copyright */}
-        <div className="border-t border-white/10">
-          <div className="mx-auto flex max-w-7xl items-center justify-center px-4 py-3 text-[12.5px] text-white/60">
+        <div className="border-t border-gray-100 bg-white">
+          <div className="mx-auto flex max-w-7xl items-center justify-center px-4 py-4 text-[12.5px] text-gray-500">
             <p>© 2025 RESORB. All rights reserved.</p>
           </div>
         </div>
       </section>
 
       {/* Mobile footer — preserved from original */}
-      <section className="lg:hidden bg-[#1C2E6B]">
+      <section className="bg-[#1C2E6B] text-slate-300 lg:hidden">
         <div className="mx-auto max-w-7xl px-4 py-5">
           <div className="flex flex-col gap-5">
             <div>
@@ -169,10 +165,10 @@ export default function Footer() {
                   <WhatsAppIcon className="h-3.5 w-3.5" />
                 </div>
                 <a
-                  href="tel:+919876543210"
+                  href="tel:+917011779887"
                   className="text-sm font-semibold text-[#20D6C7] transition-colors hover:text-white"
                 >
-                  +91 98765 43210
+                  +91 70117 79887
                 </a>
               </div>
             </div>

@@ -8,30 +8,35 @@ const CARD_W = 768;
 const CARD_H = 1024;
 
 const MOBILE_DEVICE_CARDS = [
-  { title: "AC Remotes", href: "/category/ac-remotes", image: "/images/categories/mobile/ac-remotes.png" },
-  { title: "TV Remotes", href: "/category/tv-remotes", image: "/images/categories/mobile/tv-remotes.png" },
-  { title: "Set-Top Box Remotes", href: "/category/set-top-box-remotes", image: "/images/categories/mobile/set-top-box-remotes.png" },
-  { title: "Streaming Remotes", href: "/category/streaming-remotes", image: "/images/categories/mobile/streaming-remotes.png" },
-  { title: "Home Theatre Remotes", href: "/category/speaker-remotes", image: "/images/categories/mobile/home-theatre-remotes.png" },
-  { title: "Projector Remotes", href: "/category/projector-remotes", image: "/images/categories/mobile/projector-remotes.png" },
+  { title: "LED TV Remotes", href: "/category/tv-remotes", image: "/images/categories/tv-remotes.png" },
+  { title: "AC Remotes", href: "/category/ac-remotes", image: "/images/categories/ac-remotes.png" },
+  { title: "Set-Top Box", href: "/category/set-top-box-remotes", image: "/images/categories/set-top-box-remotes.png" },
+  { title: "Home Theatre", href: "/category/speaker-remotes", image: "/images/categories/home-theatre-remotes.png" },
+  { title: "Projectors", href: "/category/projector-remotes", image: "/images/categories/projector-remotes.png" },
+  { title: "Fan Remotes", href: "/category/fan-remotes", image: "/images/categories/fan-remotes.png" },
 ];
 
 function MobileCategoryCard({ category }) {
   return (
     <Link
       href={category.href}
-      className="block w-full min-w-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1C2E6B] focus-visible:ring-offset-2"
+      className="group block w-full min-w-0 overflow-hidden rounded-xl border border-transparent bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400"
       aria-label={`Browse ${category.title}`}
     >
-      <Image
-        src={category.image}
-        alt={category.title}
-        width={CARD_W}
-        height={CARD_H}
-        unoptimized
-        sizes="45vw"
-        className="block h-auto w-full"
-      />
+      <div className="flex aspect-square items-center justify-center p-4 pb-2">
+        <Image
+          src={category.image}
+          alt={category.title}
+          width={400}
+          height={400}
+          unoptimized
+          sizes="45vw"
+          className="block h-auto w-full object-contain mix-blend-multiply"
+        />
+      </div>
+      <div className="px-3 pb-4 pt-1 text-center">
+        <h3 className="text-sm font-semibold leading-tight text-gray-900">{category.title}</h3>
+      </div>
     </Link>
   );
 }

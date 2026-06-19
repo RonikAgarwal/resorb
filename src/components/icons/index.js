@@ -214,3 +214,47 @@ export function ChartPieIcon({ className = "w-5 h-5" }) {
     </svg>
   );
 }
+
+export function AcIcon({ className = "w-5 h-5" }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M14 6l-4 4m0 0l-4-4m4 4v8m4-8l4-4M6 14l4 4m0 0l4-4" />
+    </svg>
+  );
+}
+
+export function TvIcon({ className = "w-5 h-5" }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M8 22h8m-4-22v6" />
+    </svg>
+  );
+}
+
+export function SetTopBoxIcon({ className = "w-5 h-5" }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M4 14h16a2 2 0 012 2v2a2 2 0 01-2 2H4a2 2 0 01-2-2v-2a2 2 0 012-2z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 10a4 4 0 100-8 4 4 0 000 8zM12 10v4" />
+    </svg>
+  );
+}
+
+export function SpeakerIcon({ className = "w-5 h-5" }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M8 5v14a2 2 0 002 2h4a2 2 0 002-2V5a2 2 0 00-2-2h-4a2 2 0 00-2 2z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 9a1 1 0 100-2 1 1 0 000 2zM12 17a2 2 0 100-4 2 2 0 000 4z" />
+    </svg>
+  );
+}
+
+export function ProjectorIcon({ className = "w-5 h-5" }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M4 8h16a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2v-8a2 2 0 012-2z" />
+      <circle cx="16" cy="14" r="3" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}

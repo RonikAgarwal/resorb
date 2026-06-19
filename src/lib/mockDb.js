@@ -9,7 +9,7 @@ const INITIAL_DATA = [
   { 
     id: "ORD123456", 
     customerName: "Rahul Sharma", 
-    phone: "9876543210", 
+    phone: "7011779887", 
     email: "rahul@example.com",
     address: "C-12, Sector 15",
     city: "Noida",

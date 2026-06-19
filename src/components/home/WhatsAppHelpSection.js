@@ -1,7 +1,7 @@
 import { WhatsAppIcon } from "@/components/icons";
 
 const WHATSAPP_URL =
-  "https://wa.me/919876543210?text=Hi%2C%20I%20need%20help%20finding%20the%20right%20replacement%20remote.%20I%20can%20share%20a%20photo.";
+  "https://wa.me/917011779887?text=Hi%2C%20I%20need%20help%20finding%20the%20right%20replacement%20remote.%20I%20can%20share%20a%20photo.";
 
 export default function WhatsAppHelpSection() {
   return (

@@ -76,7 +76,7 @@ export default function TrackPage() {
         <div className="bg-red-50 border border-red-100 rounded-xl p-4 mb-6">
           <p className="text-sm text-red-600">{error}</p>
           <a
-            href="https://wa.me/919876543210?text=Hi%2C%20I%20need%20help%20tracking%20my%20order."
+            href="https://wa.me/917011779887?text=Hi%2C%20I%20need%20help%20tracking%20my%20order."
             target="_blank"
             rel="noopener noreferrer"
             className="text-sm text-green-600 font-medium mt-2 inline-block"
@@ -162,7 +162,7 @@ export default function TrackPage() {
             <strong>Can&apos;t find your order? </strong>  WhatsApp us with your phone number and we&apos;ll fetch the details for you.
           </p>
           <a
-            href="https://wa.me/919876543210?text=Hi%2C%20I%20need%20help%20tracking%20my%20order.%20My%20number%20is%3A"
+            href="https://wa.me/917011779887?text=Hi%2C%20I%20need%20help%20tracking%20my%20order.%20My%20number%20is%3A"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-sm font-semibold text-green-700 hover:text-green-800"

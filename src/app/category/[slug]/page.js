@@ -90,7 +90,7 @@ export default async function CategoryPage({ params }) {
               We&apos;re adding products to this category. WhatsApp us for specific requirements.
             </p>
             <a
-              href="https://wa.me/919876543210"
+              href="https://wa.me/917011779887"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-green-500 text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-green-600 transition-colors"

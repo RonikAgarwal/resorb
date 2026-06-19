@@ -16,8 +16,8 @@ export default function VideoShowcase() {
   }
 
   return (
-    <div className="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm">
-      <div className="relative aspect-[2/1] bg-[#E0EEF0]">
+    <div className="overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-[0_14px_36px_rgba(28,46,107,0.07)]">
+      <div className="relative aspect-[2.85/1] bg-[#E0EEF0]">
         <video
           ref={videoRef}
           src="/videos/resorb-video.mp4"
@@ -35,7 +35,7 @@ export default function VideoShowcase() {
           <button
             type="button"
             onClick={handlePlay}
-            className="absolute inset-0 flex flex-col items-center justify-center gap-8 bg-[#E0EEF0] text-center"
+            className="absolute inset-0 flex flex-col items-center justify-center gap-7 bg-[#E0EEF0] text-center"
             aria-label="Play RESORB video"
           >
             <span className="relative flex flex-col items-center">
@@ -45,16 +45,16 @@ export default function VideoShowcase() {
                 width={1137}
                 height={363}
                 unoptimized
-                className="h-auto w-56 sm:w-80 lg:w-[420px]"
+                className="h-auto w-56 sm:w-72 lg:w-[320px]"
                 priority={false}
               />
-              <span className="mt-5 text-xs sm:text-base font-semibold tracking-[0.45em] text-[#1C2E6B]">
+              <span className="mt-3 text-xs font-semibold text-[#1C2E6B] sm:text-sm">
                 HOUSE OF REMOTES
               </span>
             </span>
 
-            <span className="relative flex h-16 w-16 items-center justify-center rounded-full border-2 border-white bg-white/80 text-[#1C2E6B] shadow-md transition-transform hover:scale-105">
-              <svg className="ml-1 h-8 w-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <span className="relative flex h-[52px] w-[52px] items-center justify-center rounded-full border-2 border-white bg-white/90 text-[#1C2E6B] shadow-[0_10px_24px_rgba(28,46,107,0.16)] transition-transform hover:scale-105">
+              <svg className="ml-0.5 h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M8 5v14l11-7z" />
               </svg>
             </span>
