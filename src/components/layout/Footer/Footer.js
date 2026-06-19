@@ -143,7 +143,7 @@ export default function Footer() {
         {/* Copyright */}
         <div className="border-t border-gray-100 bg-white">
           <div className="mx-auto flex max-w-7xl items-center justify-center px-4 py-4 text-[12.5px] text-gray-500">
-            <p>© 2025 RESORB. All rights reserved.</p>
+            <p>© 2026 RESORB. All rights reserved.</p>
           </div>
         </div>
       </section>
@@ -199,7 +199,7 @@ export default function Footer() {
 
         <div className="border-t border-white/10">
           <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-3 text-[12px] text-white/60">
-            <p>© 2025 RESORB. All rights reserved.</p>
+            <p>© 2026 RESORB. All rights reserved.</p>
           </div>
         </div>
       </section>
