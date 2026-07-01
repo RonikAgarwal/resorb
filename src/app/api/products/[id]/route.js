@@ -37,6 +37,8 @@ export async function PUT(request, { params }) {
 
     const updates = {
       ...(data.title !== undefined && { title: data.title }),
+      ...(data.item_name !== undefined && { item_name: data.item_name }),
+      ...(data.model_name !== undefined && { model_name: data.model_name }),
       ...(data.category !== undefined && { category: data.category }),
       ...(data.brand !== undefined && { brand: data.brand }),
       ...(data.images !== undefined && { images: data.images }),
@@ -45,6 +47,14 @@ export async function PUT(request, { params }) {
       ...(data.discount !== undefined && { discount: data.discount }),
       ...(data.specs !== undefined && { specs: data.specs }),
       ...(data.description !== undefined && { description: data.description }),
+      ...(data.model_family !== undefined && { model_family: data.model_family }),
+      ...(data.compatibility !== undefined && { compatibility: data.compatibility }),
+      ...(data.quality !== undefined && { quality: data.quality }),
+      ...(data.quality_assurance !== undefined && { quality_assurance: data.quality_assurance }),
+      ...(data.disclaimer !== undefined && { disclaimer: data.disclaimer }),
+      ...(data.safety_information !== undefined && { safety_information: data.safety_information }),
+      ...(data.pairing_required !== undefined && { pairing_required: data.pairing_required }),
+      ...(data.pairing_instructions !== undefined && { pairing_instructions: data.pairing_instructions }),
       ...(data.weight_grams !== undefined && { weight_grams: data.weight_grams }),
       ...(data.length_cm !== undefined && { length_cm: data.length_cm }),
       ...(data.width_cm !== undefined && { width_cm: data.width_cm }),

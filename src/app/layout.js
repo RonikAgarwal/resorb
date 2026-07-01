@@ -29,7 +29,7 @@ export const metadata = {
     template: "%s | RESORB",
   },
   description:
-    "Find the exact replacement remote for your TV, AC, Set-Top Box, Speaker, or Streaming Device. Verified compatibility, plug & play, free shipping above ₹499. WhatsApp support available.",
+    "Find the exact replacement remote for your TV, AC, Set-Top Box, Speaker, or Streaming Device. Verified compatibility, free shipping above ₹499. WhatsApp support available.",
   keywords: [
     "replacement remote",
     "TV remote",
@@ -49,7 +49,7 @@ export const metadata = {
     siteName: "RESORB",
     title: "RESORB — Replacement Remote Controls",
     description:
-      "Find the exact replacement remote for your device. Verified compatibility. Plug & play. WhatsApp support.",
+      "Find the exact replacement remote for your device. Verified compatibility. WhatsApp support.",
   },
   robots: { index: true, follow: true },
 };

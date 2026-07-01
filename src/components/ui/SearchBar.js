@@ -5,10 +5,9 @@ import { useRouter } from "next/navigation";
 
 const QUICK_SEARCHES = [
   "Samsung TV",
-  "Voltas AC",
+  "Lloyd AC",
   "Tata Play",
   "Mi TV",
-  "Daikin AC",
   "Fire TV Stick",
 ];
 

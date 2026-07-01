@@ -38,7 +38,7 @@ export default function MobileProductCard({ product }) {
 
   const primaryBrand = compatibleBrands[0] || product.brand || "RESORB";
   const categoryLabel = CATEGORY_LABELS[category] || "Replacement Remote";
-  const productTitle = `${primaryBrand} ${categoryLabel}`;
+  const productTitle = product.item_name || product.title || `${primaryBrand} ${categoryLabel}`;
 
   return (
     <Link
@@ -86,6 +86,7 @@ export default function MobileProductCard({ product }) {
       </div>
 
       <div className="flex flex-1 flex-col p-3 pt-2">
+        <span className="mb-1 text-[10px] font-medium text-gray-500 uppercase tracking-wider">{primaryBrand}</span>
         <p className="line-clamp-2 text-xs font-bold leading-snug text-[#1C2E6B]">{productTitle}</p>
 
         <div className="mt-auto flex items-baseline gap-1.5 pt-2">

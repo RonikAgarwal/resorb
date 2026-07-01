@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import CategoryProductCard from "@/components/product/CategoryProductCard";
+import ProductCard from "@/components/product/ProductCard";
 import { getCategoryBySlug } from "@/data/categories";
 import { getProductsByCategory } from "@/lib/products";
 import { getBrandsByCategory } from "@/data/brands";
@@ -13,7 +13,7 @@ export async function generateMetadata({ params }) {
   if (!category) return {};
   return {
     title: `${category.name} — RESORB Replacement Remotes`,
-    description: `Shop replacement remotes for ${category.name}. Verified compatibility with top Indian brands. Plug & play. WhatsApp support.`,
+    description: `Shop replacement remotes for ${category.name}. Verified compatibility with top Indian brands. WhatsApp support.`,
   };
 }
 
@@ -77,7 +77,7 @@ export default async function CategoryPage({ params }) {
         {products.length > 0 ? (
           <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-5">
             {products.map((product, idx) => (
-              <CategoryProductCard key={product.id} product={product} index={idx} />
+              <ProductCard key={product.id} product={product} index={idx} />
             ))}
           </div>
         ) : (

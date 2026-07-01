@@ -1,5 +1,9 @@
+'use client';
+
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useCart } from "@/context/CartContext";
 
 const CATEGORY_IMAGES = {
   "tv-remotes": "/images/remotes/tv.png",
@@ -21,11 +25,11 @@ const CATEGORY_LABELS = {
   "universal-remotes": "Universal Remote",
 };
 
-export default function ProductCard({ product }) {
-  // Support both old hardcoded shape (originalPrice, compatibleBrands)
-  // and new DB shape (mrp, compatible_brands)
+export default function ProductCard({ product, index = 0 }) {
+  const { addItem, items } = useCart();
+  const [added, setAdded] = useState(false);
+
   const id = product.id;
-  const title = product.title;
   const price = product.price;
   const originalPrice = product.mrp || product.originalPrice || price;
   const discount = product.discount || 0;
@@ -34,7 +38,6 @@ export default function ProductCard({ product }) {
   const popular = product.popular;
   const compatibleBrands = product.compatible_brands || product.compatibleBrands || [];
 
-  // Use product-specific images if available, otherwise fallback to category image
   const hasProductImages = product.images && product.images.length > 0 && product.images[0].startsWith("http");
   const imgSrc = hasProductImages
     ? product.images[0]
@@ -43,74 +46,137 @@ export default function ProductCard({ product }) {
 
   const primaryBrand = compatibleBrands[0] || product.brand || "RESORB";
   const categoryLabel = CATEGORY_LABELS[category] || "Replacement Remote";
-  const productTitle = `${primaryBrand} ${categoryLabel}`;
+  
+  // Use full item name from database
+  const productTitle = product.item_name || product.title || `${primaryBrand} ${categoryLabel}`;
+  
   const compatibilityText =
     compatibleBrands.length > 1
       ? `Compatible with multiple ${primaryBrand} models`
       : `Compatible with ${primaryBrand} models`;
 
+  const isInCart = items.some((i) => i.id === id);
+
+  useEffect(() => {
+    if (added) {
+      const t = setTimeout(() => setAdded(false), 1500);
+      return () => clearTimeout(t);
+    }
+  }, [added]);
+
+  function handleAddToCart(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!inStock) return;
+    
+    // Format for cart
+    const cartProduct = {
+      id: product.id,
+      name: productTitle,
+      price: product.price,
+      originalPrice: product.mrp,
+      image: imgSrc,
+      inStock: inStock,
+    };
+    
+    addItem(cartProduct);
+    setAdded(true);
+  }
+
+  // Stagger animation delay based on card index
+  const animDelay = `${Math.min(index * 60, 600)}ms`;
+
   return (
     <Link
       href={`/product/${id}`}
-      className="group relative flex min-h-[184px] flex-col overflow-hidden rounded-lg border border-gray-200 bg-white p-4 transition-all duration-200 hover:border-[#CFE6EA] hover:shadow-lg sm:flex-row"
-      aria-label={`${productTitle} - ${title}`}
+      className="cat-card cat-card-animated"
+      style={{ animationDelay: animDelay }}
+      aria-label={`${productTitle} — ₹${price}`}
     >
-      <div className="absolute left-4 top-3 z-10 flex items-center gap-1.5">
-        {discount > 0 && (
-          <span className="rounded bg-emerald-500 px-2 py-1 text-[10px] font-bold text-white">
-            {discount}% OFF
-          </span>
-        )}
-        {popular && (
-          <span className="rounded bg-[#1C2E6B] px-2 py-1 text-[10px] font-bold text-white">
-            BEST SELLER
-          </span>
-        )}
-      </div>
+      {/* ── Image Area ── */}
+      <div className="cat-card-image-wrap">
+        {/* Badges */}
+        <div className="cat-card-badges">
+          {discount > 0 && (
+            <span className="cat-badge-discount">{discount}% OFF</span>
+          )}
+          {popular && (
+            <span className="cat-badge-bestseller">BEST SELLER</span>
+          )}
+        </div>
 
-      <div className="relative mx-auto mt-8 h-[118px] w-[76px] flex-shrink-0 overflow-hidden rounded-md bg-white sm:mr-4 sm:mt-7 sm:h-[132px] sm:w-[76px]">
-        {isExternal ? (
-          <img
-            src={imgSrc}
-            alt={productTitle}
-            className="absolute inset-0 w-full h-full scale-[2.05] object-contain transition-transform duration-300 group-hover:scale-[2.16]"
-          />
-        ) : (
-          <Image
-            src={imgSrc}
-            alt={productTitle}
-            fill
-            sizes="80px"
-            className="scale-[2.05] object-contain transition-transform duration-300 group-hover:scale-[2.16]"
-          />
-        )}
+        {/* Product Image */}
+        <div className="cat-card-image-inner">
+          {isExternal ? (
+            <img
+              src={imgSrc}
+              alt={productTitle}
+              style={{
+                position: "absolute",
+                inset: 0,
+                width: "100%",
+                height: "100%",
+                objectFit: "contain",
+              }}
+            />
+          ) : (
+            <Image
+              src={imgSrc}
+              alt={productTitle}
+              fill
+              sizes="100px"
+              style={{ objectFit: "contain" }}
+            />
+          )}
+        </div>
+
+        {/* Out of Stock */}
         {!inStock && (
-          <div className="absolute inset-0 bg-white/70 flex items-center justify-center">
-            <span className="text-xs font-semibold text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
-              Out of Stock
-            </span>
+          <div className="cat-card-oos-overlay">
+            <span className="cat-card-oos-label">Out of Stock</span>
           </div>
         )}
       </div>
 
-      <div className="min-w-0 flex-1 pt-4 text-center sm:pt-7 sm:text-left">
-        <p className="mb-2 line-clamp-2 text-sm font-bold leading-snug text-[#1C2E6B]">
-          {productTitle}
-        </p>
-        <p className="mb-3 line-clamp-2 text-sm leading-relaxed text-gray-600">
-          {compatibilityText}
-        </p>
+      {/* ── Info Area ── */}
+      <div className="cat-card-info">
+        <span className="cat-card-brand">{primaryBrand}</span>
+        <p className="cat-card-title">{productTitle}</p>
+        <p className="cat-card-compat">{compatibilityText}</p>
 
-        <div className="mt-4 flex items-baseline gap-2">
-          <span className="text-xl font-bold text-[#1C2E6B]">
-            ₹{price.toLocaleString("en-IN")}
-          </span>
+        {/* Price */}
+        <div className="cat-card-price-row">
+          <span className="cat-card-price">₹{price.toLocaleString("en-IN")}</span>
           {originalPrice > price && (
-            <span className="text-xs text-gray-400 line-through">
-              ₹{originalPrice.toLocaleString("en-IN")}
-            </span>
+            <span className="cat-card-mrp">₹{originalPrice.toLocaleString("en-IN")}</span>
           )}
         </div>
+
+        {/* Add to Cart */}
+        <button
+          className={`cat-card-cta ${
+            !inStock
+              ? "cat-card-cta-disabled"
+              : added
+              ? "cat-card-cta-added"
+              : ""
+          }`}
+          onClick={handleAddToCart}
+          disabled={!inStock}
+        >
+          {!inStock ? (
+            "Out of Stock"
+          ) : added ? (
+            "✓ Added"
+          ) : (
+            <>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"/>
+              </svg>
+              Add to Cart
+            </>
+          )}
+        </button>
       </div>
     </Link>
   );

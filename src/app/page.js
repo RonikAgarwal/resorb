@@ -9,7 +9,7 @@ import UspStrip from "@/components/home/UspStrip";
 export const metadata = {
   title: "RESORB — India's Trusted Replacement Remote Control Store",
   description:
-    "Find the exact replacement remote for your TV, AC, Set-Top Box, and more. Verified compatibility. Plug & play. Free shipping above ₹499.",
+    "Find the exact replacement remote for your TV, AC, Set-Top Box, and more. Verified compatibility. Free shipping above ₹499.",
 };
 
 export const dynamic = "force-dynamic";

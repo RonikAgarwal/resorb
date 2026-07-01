@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { SearchIcon, ShieldCheckIcon, PlugIcon, RefreshIcon, ChatIcon } from "@/components/icons";
+import { SearchIcon, ShieldCheckIcon, StarIcon, RefreshIcon, ChatIcon } from "@/components/icons";
 import MobileCompatibilityHero from "@/components/home/MobileCompatibilityHero";
 import ReassuranceStrip from "@/components/home/ReassuranceStrip";
 
@@ -21,13 +21,13 @@ const HERO_TRUST_ITEMS = [
   {
     title: "Premium Quality",
     text: "Durable & Reliable",
-    icon: "plug",
+    icon: "premium",
     colorClass: "text-[#0EA5A4]"
   },
   {
     title: "Tested Before Dispatch",
     text: "Quality Assured",
-    icon: "refresh",
+    icon: "tested",
     colorClass: "text-[#0B2559]"
   },
   {
@@ -39,7 +39,22 @@ const HERO_TRUST_ITEMS = [
 ];
 
 function TrustIcon({ type }) {
-  if (type === "plug") return <PlugIcon className="h-5 w-5" />;
+  if (type === "star" || type === "premium") {
+    return (
+      <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M6 3h12l4 6-10 13L2 9Z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M11 3 8 9l4 13 4-13-3-6" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M2 9h20" />
+      </svg>
+    );
+  }
+  if (type === "tested") {
+    return (
+      <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
+      </svg>
+    );
+  }
   if (type === "refresh") return <RefreshIcon className="h-5 w-5" />;
   if (type === "chat") return <ChatIcon className="h-5 w-5" />;
   return <ShieldCheckIcon className="h-5 w-5" />;

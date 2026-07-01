@@ -4,10 +4,12 @@ import {
   SetTopBoxIcon,
   SpeakerIcon,
   ProjectorIcon,
+  FanIcon,
 } from "@/components/icons";
 
 /**
  * RESORB Product Categories
+ * 6 confirmed categories — single source of truth
  */
 export const categories = [
   {
@@ -60,7 +62,7 @@ export const categories = [
     name: "Fan Remotes",
     slug: "fan-remotes",
     description: "Replacement remotes for BLDC ceiling fans, pedestal fans, and tower fans.",
-    icon: AcIcon,
+    icon: FanIcon,
     seoTitle: "Fan Replacement Remotes | RESORB",
     seoDescription: "Buy replacement remotes for smart ceiling fans and pedestal fans.",
   },

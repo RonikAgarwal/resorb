@@ -8,6 +8,7 @@ export async function getProductById(id) {
     .from("products")
     .select("*")
     .eq("id", id)
+    .eq("status", "published")
     .single();
 
   if (error || !data) return null;
@@ -21,7 +22,7 @@ export async function getAllProducts() {
   const { data, error } = await supabaseAdmin
     .from("products")
     .select("*")
-    .neq("status", "archived")
+    .eq("status", "published")
     .order("created_at", { ascending: false });
 
   if (error) {
@@ -39,7 +40,7 @@ export async function getProductsByCategory(categorySlug) {
     .from("products")
     .select("*")
     .eq("category", categorySlug)
-    .neq("status", "archived")
+    .eq("status", "published")
     .order("popular", { ascending: false });
 
   if (error) {
@@ -57,7 +58,7 @@ export async function getPopularProducts(limit = 10) {
     .from("products")
     .select("*")
     .eq("popular", true)
-    .neq("status", "archived")
+    .eq("status", "published")
     .limit(limit);
 
   if (error) {
@@ -76,11 +77,33 @@ export async function getRelatedProducts(product, limit = 4) {
     .select("*")
     .eq("category", product.category)
     .neq("id", product.id)
-    .neq("status", "archived")
+    .eq("status", "published")
     .limit(limit);
 
   if (error) {
     console.error("Error fetching related products:", error);
+    return [];
+  }
+  return data || [];
+}
+
+/**
+ * Fetch products that share any model_family tag with the current product.
+ * Used for the "Similar Models" section on the product page.
+ */
+export async function getSimilarModelProducts(product) {
+  const modelFamily = product.model_family;
+  if (!modelFamily || modelFamily.length === 0) return [];
+
+  const { data, error } = await supabaseAdmin
+    .from("products")
+    .select("id, title, item_name, model_name, sku, model_family, images, price, mrp")
+    .overlaps("model_family", modelFamily)
+    .neq("id", product.id)
+    .eq("status", "published");
+
+  if (error) {
+    console.error("Error fetching similar model products:", error);
     return [];
   }
   return data || [];
@@ -93,7 +116,7 @@ export async function searchProducts(query, { category, brand } = {}) {
   if (!query || query.trim().length < 2) {
     // If no query but filters exist, just return filtered
     if (category || brand) {
-      let q = supabaseAdmin.from("products").select("*").neq("status", "archived");
+      let q = supabaseAdmin.from("products").select("*").eq("status", "published");
       if (category) q = q.eq("category", category);
       if (brand) q = q.eq("brand", brand);
       const { data } = await q.order("popular", { ascending: false });
@@ -108,7 +131,7 @@ export async function searchProducts(query, { category, brand } = {}) {
   const { data: allProducts, error } = await supabaseAdmin
     .from("products")
     .select("*")
-    .neq("status", "archived");
+    .eq("status", "published");
 
   if (error || !allProducts) return [];
 
